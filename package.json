@@ -1,0 +1,42 @@
+{
+  "name": "picker",
+  "version": "0.1.0",
+  "description": "Multi-select tags like picker as plugin for jQuery",
+  "main": "js/picker.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AuHau/picker.git"
+  },
+  "keywords": [
+    "jquery",
+    "js",
+    "multiselect",
+    "tags"
+  ],
+  "author": "Adam Uhlir <hello@adam-uhlir.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AuHau/picker/issues"
+  },
+  "homepage": "https://github.com/AuHau/picker#readme",
+  "devDependencies": {
+    "bower": "^1.6.3",
+    "gulp": "^3.8.10",
+    "gulp-concat": "^2.4.3",
+    "gulp-ignore": "^1.2.1",
+    "gulp-less": "^3.0.3",
+    "gulp-load-plugins": "^0.8.0",
+    "gulp-notify": "^2.1.0",
+    "gulp-uglify": "^1.0.2",
+    "gulp-rename": "^1.2.2",
+    "less-plugin-autoprefix": "^1.1.0",
+    "less-plugin-clean-css": "^1.4.0",
+    "main-bower-files": "^2.4.1"
+  }
+}
