@@ -28,6 +28,7 @@
   "devDependencies": {
     "bower": "^1.6.3",
     "gulp": "^3.8.10",
+    "gulp-add-src": "^0.2.0",
     "gulp-concat": "^2.4.3",
     "gulp-ignore": "^1.2.1",
     "gulp-less": "^3.0.3",

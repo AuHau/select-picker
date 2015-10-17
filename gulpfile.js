@@ -51,7 +51,11 @@ gulp.task('examples:js', function() {
 });
 
 gulp.task('examples:css', function() {
-    return gulp.src(mainBowerFiles({'includeDev': true}))
+    return gulp.src('examples/css/main.less')
+        .pipe(plugins.less({
+            plugins: [autoprefix, cleancss]
+        }))
+        .pipe(plugins.addSrc.prepend(mainBowerFiles()))
         .pipe(plugins.ignore.include('*.css'))
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.concat('main.css'))
