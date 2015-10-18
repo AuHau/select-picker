@@ -1,14 +1,33 @@
+
+/////////////////////////////
+// Picker settings
+
+@pc-border-color:#666666;
+@pc-border-radius: 2px;
+
+@pc-color: #666666;
+@pc-background: #ffffff;
+
+@pc-hover-color: #ffffff;
+@pc-hover-background: #666666;
+
+@pc-zindex: 10;
+
+/////////////////////////////
+
 .picker{
   display: inline-block;
 
   .pc-element, .pc-trigger{
     display: inline-block;
-    color: #666666;
+    color: @pc-color;
     position: relative;
-    z-index: 9;
-    border: 1px solid #666666;
+    z-index: @pc-zindex;
+    border: 1px solid @pc-border-color;
+    border-radius: @pc-border-radius;
     word-wrap: break-word;
-    background-color: white;
+    cursor: default;
+    background-color: @pc-background;
     margin-right: 7px;
     margin-bottom: 5px;
     padding: 0 30px 0 10px;
@@ -28,10 +47,11 @@
       cursor: pointer;
     }
     &:hover{
-      background-color: #666666;
-      color: #ffffff;
+      background-color: @pc-hover-background;
+      color: @pc-hover-color;
     }
   }
+
 
 
 
@@ -56,12 +76,13 @@
       top: calc(~"100% - 6px");
       width: 100%;
       border: 1px solid #666666;
-      z-index: 8;
+      z-index: @pc-zindex - 1;
       background-color: #ffffff;
 
       input[type="search"]{
         width: 100%;
         outline: none;
+        color: #666666;
         border: none;
         position: relative;
         background-color: #DDDDDD;
@@ -81,15 +102,22 @@
         list-style: none;
         padding: 0 0 0 8px;
         cursor: pointer;
+        color: @pc-color;
         word-wrap: break-word;
 
         &:nth-child(even){
-          background-color: #eeeeee;
+          background-color: darken(@pc-background, 5%);
         }
 
         &:hover{
-          background-color: #666666;
-          color: #ffffff;
+          background-color: @pc-hover-background;
+          color: @pc-hover-color;
+        }
+
+        &.not-found{
+          font-style: italic;
+          text-align: center;
+          cursor: default;
         }
       }
     }
