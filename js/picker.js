@@ -1,3 +1,12 @@
+
+// TODO : Free picker from FontAwesome
+// TODO : Highlighting part of found string while searching
+// TODO : Events fireing or callback implementation
+// TODO : Add autofocus when open Picker with searchfield?
+// TODO : Search - when only one result + Enter = selected
+// TODO : Create API (destroy etc)
+
+
 ;(function( $, window, document, undefined ){
     var Picker = function( elem, options ){
         this.elem = elem;
@@ -24,7 +33,7 @@
             this.config = $.extend({}, this.defaults, this.options);
 
             if(this.config.multiple === undefined) {
-                this.config.multiple = this.$elem.is("select[multiple='multiple']");
+                this.config.multiple = this.$elem.is("select[multiple='multiple']") || this.$elem.is("select[multiple]");
             }
 
             if(!this.$elem.is("select")){
@@ -163,7 +172,7 @@
                 }
             }else{
                 currentList.each(function(i,e) {
-                    var e = $(e);
+                    e = $(e);
                     if(e.is(':first-child')){
                         if(order < e.data('order')){
                             li.insertBefore(e);
@@ -221,7 +230,7 @@
             this.$container.insertAfter(this.$elem);
 
             if(this.config.search){
-                var $searchField = $("<input type='search' placeholder='Vyhledávejte'>");
+                var $searchField = $("<input type='search' placeholder='Search'>");
                 $searchField.on('input', this.pc_search.bind(this));
 
                 this.$container.find('.pc-list').prepend($searchField);
@@ -258,7 +267,7 @@
         _updateList: function(filteredData){
             var listContainer = this.$container.find('.pc-list ul');
             if(filteredData.length == 0){
-                listContainer.html('<li style="font-style: italic; text-align: center;">Žádné výsledky</li>');
+                listContainer.html('<li class="not-found">No results</li>');
                 return;
             }
 
