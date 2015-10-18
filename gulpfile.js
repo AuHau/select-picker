@@ -31,7 +31,7 @@ gulp.task('css:min', function() {
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.rename('picker.min.css'))
         .pipe(gulp.dest('css/'))
-        .pipe(plugins.notify('CSS:mini build finished'));
+        .pipe(plugins.notify('CSS:min build finished'));
 });
 
 gulp.task('js:min', function() {
@@ -55,17 +55,23 @@ gulp.task('examples:css', function() {
         .pipe(plugins.less({
             plugins: [autoprefix, cleancss]
         }))
-        .pipe(plugins.addSrc.prepend(mainBowerFiles()))
+        .pipe(plugins.addSrc.prepend(mainBowerFiles({'includeDev': true})))
         .pipe(plugins.ignore.include('*.css'))
+        .pipe(plugins.minifyCss())
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.concat('main.css'))
-        .pipe(gulp.dest('examples/css/'));
+        .pipe(gulp.dest('examples/css/'))
+        .pipe(plugins.notify('Examples:css build finished'));
 });
 
 gulp.task('css', ['css:big', 'css:min']);
 gulp.task('examples', ['examples:css', 'examples:js']);
 
 gulp.task('build', ['examples', 'css', 'js:min']);
+
+gulp.task('examples:watch', ['examples'], function () {
+    gulp.watch('examples/css/main.less', ['examples:css']);
+});
 
 gulp.task('default', ['css'], function() {
     gulp.watch('css/picker.less', ['css:big']);
