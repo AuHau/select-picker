@@ -4,10 +4,173 @@
     <meta charset="UTF-8">
     <title>Picker examples</title>
     <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+    <link href="css/prism.css" rel="stylesheet"/>
 
-<script type="text/javascript" src="js/libs.js"></script>
-<script type="text/javascript" src="../js/picker.js"></script>
+
+    <script type="text/javascript" src="js/libs.js"></script>
+    <script type="text/javascript" src="js/prism.js"></script>
+
+    <!-- Picker files -->
+    <link rel="stylesheet" href="../css/picker.css">
+    <script type="text/javascript" src="../js/picker.js"></script>
+</head>
+<body data-spy="scroll" data-target="#picker-nav">
+<div class="content-container">
+
+    <div class="masthead clearfix">
+        <h3 class="masthead-brand">Picker</h3>
+        <nav id="picker-nav">
+            <ul class="nav masthead-nav">
+                <li class="active"><a href="#about">About</a></li>
+                <li><a href="#examples">Examples</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#documentation">Documentation</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="about">
+        <h1>About</h1>
+        Picker is jQuery plugin for transforming select boxes into .
+    </div>
+
+    <div id="examples">
+        <h1>Examples</h1>
+
+        <h2>Basic picker</h2>
+        Picker for single-select select box, without any other cool features.
+        <div class="well">
+            Categorize your personality:
+            <select name="basic" id="ex-basic">
+                <option value="1">Nice</option>
+                <option value="2">Very nice</option>
+                <option value="3">Awesome</option>
+                <option value="4">Godlike</option>
+            </select>
+            <script type="text/javascript">
+                $('#ex-basic').picker();
+            </script>
+
+        </div>
+
+        <strong>HTML</strong>
+<pre><code class="language-markup">&lt;select name=&quot;basic&quot; id=&quot;ex-basic&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;Nice&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Very nice&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Awesome&lt;/option&gt;
+    &lt;option value=&quot;4&quot;&gt;Godlike&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+        <strong>Javascript</strong>
+<pre><code class="language-javascript">&lt;script type=&quot;text/javascript&quot;&gt;
+    $('#ex-basic').picker();
+&lt;/script&gt;
+</code></pre>
+
+        <h2>Multi-select picker</h2>
+        Main purpose why Picker was developed was for tag selection. You can enable this
+        feature really easily. Picker is smart enough to detect presence of <code>multiple</code>
+        attribute and then enable multiple selection.
+        Of course you can always override this in options when initializing picker.
+        <div class="well">
+            Choose what type of people you like:
+            <select name="basic" id="ex-multiselect" multiple>
+                <option value="1">Kind</option>
+                <option value="2">Easy-going</option>
+                <option value="3">Extroverts</option>
+                <option value="4">Introverts</option>
+                <option value="5">Ambitious</option>
+                <option value="6">Loud</option>
+            </select>
+            <script type="text/javascript">
+                $('#ex-multiselect').picker();
+            </script>
+        </div>
+
+        <strong>HTML</strong>
+<pre><code class="language-markup">&lt;select name=&quot;basic&quot; id=&quot;ex-multiselect&quot; multiple&gt;
+    &lt;option value=&quot;1&quot;&gt;Kind&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Easy-going&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Extroverts&lt;/option&gt;
+    &lt;option value=&quot;4&quot;&gt;Introverts&lt;/option&gt;
+    &lt;option value=&quot;5&quot;&gt;Ambitious&lt;/option&gt;
+    &lt;option value=&quot;6&quot;&gt;Loud&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+        <strong>Javascript</strong>
+<pre><code class="language-javascript">&lt;script type=&quot;text/javascript&quot;&gt;
+    $('#ex-multiselect').picker();
+&lt;/script&gt;
+</code></pre>
+
+        <h2>Picker with search</h2>
+        Since sometime you have a lot of possibilities to choose from and it might be
+        hard to find the choice you are looking for. But don't fall in despair my friend!
+        Exactly for this case, there is search function implemented!
+
+        <div class="well">
+            Choose the main city you love:
+            <select name="basic" id="ex-search" multiple>
+                <option value="1">Shanghai</option>
+                <option value="2">Karachi</option>
+                <option value="3">Beijing</option>
+                <option value="4">Tianjin</option>
+                <option value="5">Istanbul</option>
+                <option value="6">Lagos</option>
+                <option value="7">Tokyo</option>
+                <option value="8">Guangzhou</option>
+                <option value="9">Mumbai</option>
+                <option value="10">Moscow</option>
+                <option value="11">Dhaka</option>
+                <option value="12">Cairo</option>
+            </select>
+            <script type="text/javascript">
+                $('#ex-search').picker({search : true});
+            </script>
+        </div>
+
+        <strong>HTML</strong>
+<pre><code class="language-markup">&lt;select name=&quot;basic&quot; id=&quot;ex-search&quot; multiple&gt;
+    &lt;option value=&quot;1&quot;&gt;Shanghai&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Karachi&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Beijing&lt;/option&gt;
+    &lt;option value=&quot;4&quot;&gt;Tianjin&lt;/option&gt;
+    &lt;option value=&quot;5&quot;&gt;Istanbul&lt;/option&gt;
+    &lt;option value=&quot;6&quot;&gt;Lagos&lt;/option&gt;
+    &lt;option value=&quot;7&quot;&gt;Tokyo&lt;/option&gt;
+    &lt;option value=&quot;8&quot;&gt;Guangzhou&lt;/option&gt;
+    &lt;option value=&quot;9&quot;&gt;Mumbai&lt;/option&gt;
+    &lt;option value=&quot;10&quot;&gt;Moscow&lt;/option&gt;
+    &lt;option value=&quot;11&quot;&gt;Dhaka&lt;/option&gt;
+    &lt;option value=&quot;12&quot;&gt;Cairo&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+        <strong>Javascript</strong>
+<pre><code class="language-javascript">&lt;script type=&quot;text/javascript&quot;&gt;
+    $('#ex-search').picker({search : true});
+&lt;/script&gt;
+</code></pre>
+    </div>
+
+    <div id="installation">
+        <h1 class="cover-heading">Installation</h1>
+        Picker is jQuery plugin for
+    </div>
+
+    <div id="documentation">
+        <h1 class="cover-heading">Documentation</h1>
+        Picker is jQuery plugin for
+    </div>
+
+
+    <div class="mastfoot">
+        <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a
+                href="https://twitter.com/mdo">@mdo</a>.</p>
+    </div>
+
+</div>
 </body>
 </html>
