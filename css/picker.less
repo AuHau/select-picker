@@ -30,7 +30,7 @@
     background-color: @pc-background;
     margin-right: 7px;
     margin-bottom: 5px;
-    padding: 0 30px 0 10px;
+    padding: 0 24px 0 6px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -38,14 +38,19 @@
     -ms-user-select: none;
     user-select: none;
 
-    .fa{
+    .pc-close{
       position: absolute;
       top: 50%;
-      right: 8px;
-      margin-top: -8px;
+      right: 4px;
+      margin-top: -10px;
       font-size: 16px;
       cursor: pointer;
+      
+      &:after{
+        content: '\2716';
+      }
     }
+    
     &:hover{
       background-color: @pc-hover-background;
       color: @pc-hover-color;

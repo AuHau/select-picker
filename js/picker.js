@@ -1,5 +1,4 @@
 
-// TODO : Free picker from FontAwesome
 // TODO : Highlighting part of found string while searching
 // TODO : Events fireing or callback implementation
 // TODO : Add autofocus when open Picker with searchfield?
@@ -215,7 +214,7 @@
             var root = $("<span>").addClass("pc-element " + (tagClass ? tagClass : "")).text($elem.text())
                 .attr('data-id', $elem.data('id')).attr('data-order',$elem.data('order'));
 
-            root.append($("<i>").click(this.pc_remove.bind(this)).addClass("fa fa-close"));
+            root.append($('<span class="pc-close"></span>').click(this.pc_remove.bind(this)));
             return root;
         },
 

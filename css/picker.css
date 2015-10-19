@@ -14,21 +14,25 @@
   background-color: #ffffff;
   margin-right: 7px;
   margin-bottom: 5px;
-  padding: 0 30px 0 10px;
+  padding: 0 24px 0 6px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-.picker .pc-element .fa,
-.picker .pc-trigger .fa {
+.picker .pc-element .pc-close,
+.picker .pc-trigger .pc-close {
   position: absolute;
   top: 50%;
-  right: 8px;
-  margin-top: -8px;
+  right: 4px;
+  margin-top: -10px;
   font-size: 16px;
   cursor: pointer;
+}
+.picker .pc-element .pc-close:after,
+.picker .pc-trigger .pc-close:after {
+  content: '\2716';
 }
 .picker .pc-element:hover,
 .picker .pc-trigger:hover {
