@@ -1,8 +1,6 @@
 
-// TODO : Highlighting part of found string while searching
 // TODO : Events fireing or callback implementation
 // TODO : Add autofocus when open Picker with searchfield?
-// TODO : Search - when only one result + Enter = selected
 // TODO : Create API (destroy etc)
 
 
@@ -97,7 +95,7 @@
                     });
                 }
 
-                if(this.$container.find(".pc-list li").size() == 0 && !this.config.search) {
+                if(this.$container.find(".pc-list li").size() == 0) {
                     this.$container.find(".pc-trigger").hide();
                 }
             }else{
@@ -127,41 +125,14 @@
             var li = $("<li>").html($elem.parent().text()).attr('data-id', selectedId).attr('data-order', order);
             li.click(this.pc_selected.bind(this));
 
+
             if(this.config.search) {
-                var i;
-                for (i = 0; i < this.currentData.length; i++) {
-                    if (i == 0) {
-                        if(order < this.currentData[i].order){
-                            this.currentData.splice(0, 0, {
-                                'id': selectedId,
-                                'text': $elem.parent().text(),
-                                'order': order
-                            });
-                            break;
-                        }
-                    } else if (i == (this.currentData.length - 1)) {
-                        if(order > this.currentData[i].order){
-                            this.currentData.splice(i, 0, {
-                                'id': selectedId,
-                                'text': $elem.parent().text(),
-                                'order': order
-                            });
-                            break;
-                        }
-                    } else if (this.currentData[i - 1].order < order && order < this.currentData[i].order) {
-                        this.currentData.splice(i, 0, {
-                            'id': selectedId,
-                            'text': $elem.parent().text(),
-                            'order': order
-                        });
-                        break;
-                    }
-                }
+                this._insertIntoCurrentData(elem);
             }
 
             var currentList = this.$container.find('.pc-list li');
-            if(currentList.size() == 0) { // Empty list
-                this.$container.find('.pc-list ul').append(li);
+            if(!this.$container.find(".pc-trigger").is(':visible')) { // Empty list
+                this.$container.find('.pc-list ul').html('').append(li);
                 this.$container.find(".pc-trigger").show();
             }else if(currentList.size() == 1) { // Only one item in list
                 if(order > currentList.data('order')){
@@ -203,6 +174,52 @@
             var searchedValue = $(e.target).val().toLowerCase();
             var filteredData = this._filterData(searchedValue);
             this._updateList(filteredData, searchedValue);
+        },
+
+        _insertIntoCurrentData: function (elem) {
+            var $elem = $(elem.target);
+            var selectedId = $elem.parent().data('id');
+            var order = $elem.parent().data('order');
+
+            if(this.currentData.length == 0){
+                this.currentData = [{
+                    'id': selectedId,
+                    'text': $elem.parent().text(),
+                    'order': order
+                }];
+
+                return;
+            }
+
+            var i;
+            for (i = 0; i < this.currentData.length; i++) {
+                if (i == 0) {
+                    if(order < this.currentData[i].order || this.currentData.length == 1){
+                        this.currentData.splice(0, 0, {
+                            'id': selectedId,
+                            'text': $elem.parent().text(),
+                            'order': order
+                        });
+                        break;
+                    }
+                } else if (i == (this.currentData.length - 1)) {
+                    if(order > this.currentData[i].order){
+                        this.currentData.splice(i, 0, {
+                            'id': selectedId,
+                            'text': $elem.parent().text(),
+                            'order': order
+                        });
+                        break;
+                    }
+                } else if (this.currentData[i - 1].order < order && order < this.currentData[i].order) {
+                    this.currentData.splice(i, 0, {
+                        'id': selectedId,
+                        'text': $elem.parent().text(),
+                        'order': order
+                    });
+                    break;
+                }
+            }
         },
 
         _createElement: function($elem){
@@ -286,7 +303,7 @@
             }
 
             listContainer.html('');
-            var i, j, liContent, highlight;
+            var i, liContent;
             for(i = 0; i < filteredData.length; i++){
                 // Highlighting searched string
                 if(searchedValue !== undefined){
