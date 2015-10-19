@@ -1,7 +1,7 @@
 
 // TODO : Events fireing or callback implementation
 // TODO : Add autofocus when open Picker with searchfield?
-// TODO : Create API (destroy etc)
+// TODO/BUG : Basic select - default value
 
 
 ;(function( $, window, document, undefined ){
@@ -317,13 +317,53 @@
                 li.click(this.pc_selected.bind(this));
                 listContainer.append(li);
             }
+        },
+
+        /////////////////////////////////
+        ////////////// API //////////////
+        /////////////////////////////////
+
+        // API invocation
+        api: function (args) {
+            if(Picker.prototype['api_' + args[0]]){
+                return this['api_' + args[0]](args.slice(1));
+            }else{
+                console.log('Picker - unknown command!');
+            }
+        },
+
+        // API functions
+
+        api_destroy : function () {
+            this.$container.remove();
+            this.$elem.show();
+            this.$elem.removeData("plugin_picker");
+
+            return this.$elem;
+        },
+
+        api_get : function () {
+            return this.$elem.val();
+        },
+
+        api_set : function (args) {
+            if(args.length != 1){
+                console.log('Picker - unknown number of arguments');
+                return;
+            }
+
+            return this.$elem;
         }
     };
 
     $.fn.picker = function(options) {
-        return this.each(function() {
-            new Picker(this, options).init();
-        });
+        var instance = $(this).data("plugin_picker");
+        if (!instance) {
+            $(this).data("plugin_picker", new Picker(this, options).init());
+            return this;
+        } else {
+            return instance.api(Array.prototype.slice.call(arguments));
+        }
     };
 
 
