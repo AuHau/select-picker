@@ -201,11 +201,7 @@
 
         pc_search: function(e){
             var searchedValue = $(e.target).val().toLowerCase();
-
-            var filteredData = this.currentData.filter(function (value) {
-                 return value.text.toLowerCase().indexOf(searchedValue) != -1;
-            });
-
+            var filteredData = this._filterData(searchedValue);
             this._updateList(filteredData, searchedValue);
         },
 
@@ -231,6 +227,19 @@
             if(this.config.search){
                 var $searchField = $("<input type='search' placeholder='Search'>");
                 $searchField.on('input', this.pc_search.bind(this));
+                $searchField.on('keypress', function (e) {
+                    if(e.which == 13){
+                        var searchedValue = $(e.target).val().toLowerCase();
+                        var filteredData = this._filterData(searchedValue);
+
+                        if(filteredData.length == 1){
+                            this.$container.find('.pc-list li').first().click();
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }.bind(this));
 
                 this.$container.find('.pc-list').prepend($searchField);
             }
@@ -263,6 +272,12 @@
             this.$container.find(".pc-trigger").show();
         },
 
+        _filterData: function (searchedValue) {
+            return this.currentData.filter(function (value) {
+                return value.text.toLowerCase().indexOf(searchedValue) != -1;
+            });
+        },
+
         _updateList: function(filteredData, searchedValue){
             var listContainer = this.$container.find('.pc-list ul');
             if(filteredData.length == 0){
@@ -273,6 +288,7 @@
             listContainer.html('');
             var i, j, liContent, highlight;
             for(i = 0; i < filteredData.length; i++){
+                // Highlighting searched string
                 if(searchedValue !== undefined){
                     highlight = filteredData[i].text.split(searchedValue);
                     liContent = '';
