@@ -98,6 +98,9 @@
   text-align: center;
   cursor: default;
 }
+.picker .pc-select .pc-list li .searched {
+  font-weight: bold;
+}
 .picker .pc-select .pc-trigger {
   margin-bottom: 5px;
 }
