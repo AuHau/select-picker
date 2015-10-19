@@ -290,12 +290,8 @@
             for(i = 0; i < filteredData.length; i++){
                 // Highlighting searched string
                 if(searchedValue !== undefined){
-                    highlight = filteredData[i].text.split(searchedValue);
-                    liContent = '';
-
-                    for(j = 0; j < highlight.length; j++){
-                        liContent += highlight[j] + ( j < highlight.length - 1 ? '<span class="searched">' + searchedValue + '</span>' : '');
-                    }
+                    var regex = new RegExp( '(' + searchedValue + ')', 'gi' );
+                    liContent = filteredData[i].text.replace( regex, '<span class="searched">$1</span>' )
                 }else{
                     liContent = filteredData[i].text;
                 }
