@@ -403,12 +403,25 @@
     };
 
     $.fn.picker = function(options) {
-        var instance = $(this).data("plugin_picker");
-        if (!instance) {
-            $(this).data("plugin_picker", new Picker(this, options).init());
-            return this;
-        } else {
-            return instance.api(Array.prototype.slice.call(arguments));
+        var pickerArguments = arguments;
+
+        if($(this).length == 1){
+            var instance = $(this).data("plugin_picker");
+            if (!instance) {
+                $(this).data("plugin_picker", new Picker(this, options).init());
+                return this;
+            } else {
+                return instance.api(Array.prototype.slice.call(pickerArguments));
+            }
+        }else{
+            return this.each(function() {
+                var instance = $(this).data("plugin_picker");
+                if (!instance) {
+                    $(this).data("plugin_picker", new Picker(this, options).init());
+                } else {
+                    instance.api(Array.prototype.slice.call(pickerArguments));
+                }
+            });
         }
     };
 
