@@ -1,8 +1,8 @@
 "use strict";
 
 // TODO : Events fireing or callback implementation
-// TODO : Add autofocus when open Picker with searchfield?
-// TODO : Add width of container
+// TODO : Add support for sorting
+// TODO : Tests
 
 (function( $, window, document, undefined ){
     var Picker = function( elem, options ){
@@ -16,6 +16,7 @@
         defaults: {
             multiple: undefined,
             containerClass: '',
+            containerWidth: false,
             width: false,
             search: false,
             searchAutofocus: false,
@@ -45,6 +46,12 @@
             if(this.config.width !== false
                 && (Math.floor(this.config.width) != this.config.width || !$.isNumeric(this.config.width))){
                 console.log("Picker - Width is not a integer.");
+                return;
+            }
+
+            if(this.config.containerWidth !== false
+                && (Math.floor(this.config.containerWidth) != this.config.containerWidth || !$.isNumeric(this.config.containerWidth))){
+                console.log("Picker - Container width is not a integer.");
                 return;
             }
 
@@ -267,6 +274,10 @@
             "<span class='pc-list' " + ( this.config.width ? "style='width:" + this.config.width + "px;'" : "") + "><ul></ul></span>" +
             "</span>" +
             "</div>");
+
+            if(this.config.containerWidth !== false){
+                this.$container.width(this.config.containerWidth);
+            }
 
             this.$container.insertAfter(this.$elem);
 
