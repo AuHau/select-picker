@@ -1,0 +1,138 @@
+
+/////////////////////////////
+// Picker settings
+
+@pc-border-color:#666666;
+@pc-border-radius: 2px;
+
+@pc-color: #666666;
+@pc-background: #ffffff;
+
+@pc-hover-color: #ffffff;
+@pc-hover-background: #666666;
+
+@pc-zindex: 10;
+
+/////////////////////////////
+
+.picker{
+  display: inline-block;
+
+  .pc-element, .pc-trigger{
+    display: inline-block;
+    color: @pc-color;
+    position: relative;
+    z-index: @pc-zindex;
+    border: 1px solid @pc-border-color;
+    border-radius: @pc-border-radius;
+    word-wrap: break-word;
+    cursor: default;
+    background-color: @pc-background;
+    margin-right: 7px;
+    margin-bottom: 5px;
+    padding: 0 24px 0 6px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .pc-close{
+      position: absolute;
+      top: 50%;
+      right: 4px;
+      margin-top: -10px;
+      font-size: 16px;
+      cursor: pointer;
+      
+      &:after{
+        content: '\2716';
+      }
+    }
+    
+    &:hover{
+      background-color: @pc-hover-background;
+      color: @pc-hover-color;
+    }
+  }
+
+
+
+
+  .pc-select{
+    position: relative;
+    display: inline-block;
+    min-width: 165px;
+    max-width: 200px;
+
+    .pc-trigger{
+      cursor: pointer;
+      margin-right: 0;
+      margin-bottom: 0;
+      width: 100%;
+    }
+
+    .pc-list{
+      display: none;
+      position: absolute;
+      text-align: left;
+      left: 0;
+      top: calc(~"100% - 6px");
+      width: 100%;
+      border: 1px solid #666666;
+      z-index: @pc-zindex - 1;
+      background-color: #ffffff;
+
+      input[type="search"]{
+        width: 100%;
+        outline: none;
+        color: #666666;
+        border: none;
+        position: relative;
+        background-color: #DDDDDD;
+        border-bottom: 2px solid #666;
+        padding-left: 8px;
+      }
+
+      ul{
+        margin: 0;
+        padding: 0;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      li{
+        display: block;
+        list-style: none;
+        padding: 0 0 0 8px;
+        cursor: pointer;
+        color: @pc-color;
+        word-wrap: break-word;
+
+        &:nth-child(even){
+          background-color: darken(@pc-background, 5%);
+        }
+
+        &:hover{
+          background-color: @pc-hover-background;
+          color: @pc-hover-color;
+        }
+
+        &.not-found{
+          font-style: italic;
+          text-align: center;
+          cursor: default;
+        }
+
+        .searched{
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.picker .pc-select .pc-trigger{
+  margin-bottom: 5px;
+}

@@ -1,0 +1,35 @@
+{
+  "name": "select-picker",
+  "version": "0.1.0",
+  "authors": [
+    "Adam Uhlir <hello@adam-uhlir.me>"
+  ],
+  "description": "Multi-select tags like picker as plugin for jQuery",
+  "main": "js/picker.js",
+  "keywords": [
+    "jquery",
+    "js",
+    "multiselect",
+    "tags"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "~2.1.4"
+  },
+  "devDependencies": {
+    "bootstrap": "~3.3.5"
+  },
+  "ignore": [
+    "doc/css/main.less",
+    ".gitignore",
+    "gulpfile.js"
+  ],
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}
