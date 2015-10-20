@@ -42,7 +42,10 @@ gulp.task('js:min', function() {
 });
 
 gulp.task('doc:js', function() {
-    return gulp.src(mainBowerFiles({'includeDev': true}))
+    var files = mainBowerFiles({'includeDev': true});
+    files.push('js/picker.js');
+
+    return gulp.src(files)
         .pipe(plugins.ignore.include('*.js'))
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.concat('libs.js'))
@@ -51,23 +54,26 @@ gulp.task('doc:js', function() {
 });
 
 gulp.task('doc:css', function() {
+    var files = mainBowerFiles({'includeDev': true});
+    files.push('css/picker.css');
+
     return gulp.src('doc/css/main.less')
         .pipe(plugins.less({
             plugins: [autoprefix, cleancss]
         }))
-        .pipe(plugins.addSrc.prepend(mainBowerFiles({'includeDev': true})))
+        .pipe(plugins.addSrc.prepend(files))
         .pipe(plugins.ignore.include('*.css'))
         .pipe(plugins.minifyCss())
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.concat('main.css'))
         .pipe(gulp.dest('doc/css/'))
-        .pipe(plugins.notify('Examples:css build finished'));
+        .pipe(plugins.notify('Doc:css build finished'));
 });
 
 gulp.task('css', ['css:big', 'css:min']);
 gulp.task('doc', ['doc:css', 'doc:js']);
 
-gulp.task('build', ['examples', 'css', 'js:min']);
+gulp.task('build', ['doc', 'css', 'js:min']);
 
 gulp.task('doc:watch', ['doc'], function () {
     gulp.watch('doc/css/main.less', ['doc:css']);

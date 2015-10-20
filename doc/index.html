@@ -8,10 +8,6 @@
 
     <script type="text/javascript" src="js/libs.js"></script>
     <script type="text/javascript" src="js/prism.js"></script>
-
-    <!-- Picker files -->
-    <link rel="stylesheet" href="../css/picker.css">
-    <script type="text/javascript" src="../js/picker.js"></script>
 </head>
 <body data-spy="scroll" data-target="#picker-nav">
 <div class="content-container">
@@ -131,7 +127,7 @@
                 <option value="12">Cairo</option>
             </select>
             <script type="text/javascript">
-                $('#ex-search').picker({search : true});
+                $('#ex-search').picker({containerWidth : 465, search : true});
             </script>
         </div>
 
@@ -180,7 +176,7 @@
             </select><br>
             <button id="ex-data-trigger" class="btn btn-default">Select Cairo city</button>
             <script type="text/javascript">
-                $('#ex-data-multiple').picker();
+                $('#ex-data-multiple').picker({containerWidth : 465});
                 $('#ex-data-trigger').click(function () {
                     $('#ex-data-multiple').picker('set', 12);
                 })
@@ -244,7 +240,7 @@ $('#ex-data-trigger').click(function () {
                     5 : 'orange'
                 };
 
-                $('#ex-coloring').picker({coloring: classes});
+                $('#ex-coloring').picker({containerWidth : 465,coloring: classes});
             </script>
         </div>
 <pre><code class="language-markup">&lt;select name=&quot;basic&quot; id=&quot;ex-search&quot; multiple&gt;

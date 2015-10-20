@@ -1,5 +1,6 @@
 .picker {
   display: inline-block;
+  vertical-align: middle;
 }
 .picker .pc-element,
 .picker .pc-trigger {
