@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Picker examples</title>
+    <title>Picker | jQuery plugin</title>
     <link rel="stylesheet" href="css/main.css">
     <link href="css/prism.css" rel="stylesheet"/>
 
@@ -31,7 +31,13 @@
 
     <div id="about">
         <h1>About</h1>
-        Picker is jQuery plugin for transforming select boxes into .
+        Picker is jQuery plugin supporting work with select boxes. It extends default
+        possibilities to new range of features. In basic set up, it will mimic basic
+        select box, but in the same time provide you extensive ways of styling the
+        appearance of your select box.<br>
+        But main field where Picker truly rock is when you want to use multiple selection,
+        select boxes. It will provide you easy way how to facilitate user's selections
+        with tag-like appearance solution.
     </div>
 
     <div id="examples">
@@ -86,7 +92,7 @@
                 <option value="6">Loud</option>
             </select>
             <script type="text/javascript">
-                $('#ex-multiselect').picker();
+                $('#ex-multiselect').picker({containerWidth : 410});
             </script>
         </div>
 
@@ -208,7 +214,7 @@ $('#ex-data-trigger').click(function () {
     </div>
 
     <div id="installation">
-        <h1 class="cover-heading">Installation</h1>
+        <h1>Installation</h1>
         Picker is jQuery plugin for
     </div>
 
