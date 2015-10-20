@@ -15,8 +15,7 @@
 </head>
 <body data-spy="scroll" data-target="#picker-nav">
 <div class="content-container">
-
-    <div class="masthead clearfix">
+    <a href="https://github.com/AuHau/select-picker"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>    <div class="masthead clearfix">
         <h3 class="masthead-brand">Select Picker</h3>
         <nav id="picker-nav">
             <ul class="nav masthead-nav">
@@ -34,10 +33,10 @@
         possibilities of select boxes to new range of features. In basic set up, it will simply mimic basic
         normal select box, but in the same time provide you extensive ways of styling the
         appearance of your select box and several more neat features.<br>
-        Main field where Select Picker truly rock is when you want to use multiple selection in
-        select boxes. It will provide you easy way how to facilitate user's selections
-        with tag-like appearance solution, providing you features like custom styling and
-        search.
+        Main field where Select Picker truly rocks is when you want to use multiple-selection select boxes.
+        It will provide you easy way how to facilitate user's selections with tag-like
+        appearance solution, providing you features like custom styling and search.<br>
+        Basic Select Picker was developed while working on project for <a href="http://www.designeo.cz" target="_blank">Designeo Creative s.r.o</a>
     </div>
 
     <div id="examples">
@@ -379,15 +378,55 @@ $('#ex-coloring').picker({coloring: classes});</code></pre>
             <strong>Default:</strong> { trigger : "Select value", noResult : "No results", search : "Search" }
         </div>
         If you want to modify the Picker's messages you can modify it by passing object
-        with modified texts. Just please remember that you have to use same key values.
+        with modified texts. Just please remember that you have to use same key values as default
+        object.
 
         <h2>API</h2>
 
+        Select Picker has also basic API to modify already initialized Picker.<br>
+        Methods which do not return any value can be called with jQuery selector which
+        contains more than one elements. Methods which returns some values have to be
+        called through single element selector.
 
+        <pre><code class="language-javascript">$('.multiple-used-class').picker(); // Will work
+$('.multiple-used-class').picker('set', 2); // Will work
+$('.multiple-used-class').picker('get'); // Won't work</code></pre>
+
+        <h3>$('...').picker('destroy');</h3>
+        <div class="well">
+            <strong>Parameters:</strong> none<br>
+            <strong>Return:</strong> original jQuery selector
+        </div>
+        This method will remove all Pickers elements and display original select box.
+
+
+        <h3>$('...').picker('get');</h3>
+        <div class="well">
+            <strong>Parameters:</strong> none<br>
+            <strong>Return:</strong> string/array - actually selected value(s)
+        </div>
+        This method will return actually selected values of single Picker.<br>
+        <strong>This method has to be called from single-element selector!</strong>
+
+        <h3>$('...').picker('set', id);</h3>
+        <div class="well">
+            <strong>Parameters:</strong> id - string<br>
+            <strong>Return:</strong> original jQuery selector
+        </div>
+        This method will allow you to manually set value as selected. Parameter id is
+        value of option element. In case of multi-selection mode, it will add option as
+        another selected one.
+
+        <h3>$('...').picker('remove', id);</h3>
+        <div class="well">
+            <strong>Parameters:</strong> id - string<br>
+            <strong>Return:</strong> original jQuery selector
+        </div>
+        This method will allow you to manually remove value as selected. Parameter id is
+        value of option element. This method works only while multi-selection mode.
 
         <div class="mastfoot">
-        <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a
-                href="https://twitter.com/mdo">@mdo</a>.</p>
+        <p>Created by <a href="http://www.adam-uhlir.me">Adam Uhlíř</a> &copy; 2015</p>
     </div>
 
 </div>

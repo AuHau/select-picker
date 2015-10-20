@@ -41,17 +41,17 @@ gulp.task('js:min', function() {
         .pipe(gulp.dest('js/'));
 });
 
-gulp.task('examples:js', function() {
+gulp.task('doc:js', function() {
     return gulp.src(mainBowerFiles({'includeDev': true}))
         .pipe(plugins.ignore.include('*.js'))
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.concat('libs.js'))
         .pipe(plugins.uglify())
-        .pipe(gulp.dest('examples/js/'));
+        .pipe(gulp.dest('doc/js/'));
 });
 
-gulp.task('examples:css', function() {
-    return gulp.src('examples/css/main.less')
+gulp.task('doc:css', function() {
+    return gulp.src('doc/css/main.less')
         .pipe(plugins.less({
             plugins: [autoprefix, cleancss]
         }))
@@ -60,17 +60,17 @@ gulp.task('examples:css', function() {
         .pipe(plugins.minifyCss())
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.concat('main.css'))
-        .pipe(gulp.dest('examples/css/'))
+        .pipe(gulp.dest('doc/css/'))
         .pipe(plugins.notify('Examples:css build finished'));
 });
 
 gulp.task('css', ['css:big', 'css:min']);
-gulp.task('examples', ['examples:css', 'examples:js']);
+gulp.task('doc', ['doc:css', 'doc:js']);
 
 gulp.task('build', ['examples', 'css', 'js:min']);
 
-gulp.task('examples:watch', ['examples'], function () {
-    gulp.watch('examples/css/main.less', ['examples:css']);
+gulp.task('doc:watch', ['doc'], function () {
+    gulp.watch('doc/css/main.less', ['doc:css']);
 });
 
 gulp.task('default', ['css'], function() {
