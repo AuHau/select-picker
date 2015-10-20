@@ -2,8 +2,7 @@
 
 // TODO : Events fireing or callback implementation
 // TODO : Add autofocus when open Picker with searchfield?
-// TODO/BUG : Basic select - default value
-
+// TODO : Add width of container
 
 (function( $, window, document, undefined ){
     var Picker = function( elem, options ){
@@ -16,7 +15,6 @@
     Picker.prototype = {
         defaults: {
             multiple: undefined,
-            placeholder: true,
             containerClass: '',
             width: false,
             search: false,
@@ -256,9 +254,16 @@
         },
 
         _build: function(){
+            var triggerText;
+            if(this.config.multiple){
+                triggerText = this.config.texts.trigger;
+            }else{
+                triggerText = this.$elem.find('option').first().text();
+            }
+
             this.$container = $("<div class='picker" + (this.config.containerClass ? ' ' + this.config.containerClass : '') + "'>" +
             "<span class='pc-select'>" +
-            "<span class='pc-element pc-trigger'>" + this.config.texts.trigger + "</span>" +
+            "<span class='pc-element pc-trigger'>" + triggerText + "</span>" +
             "<span class='pc-list' " + ( this.config.width ? "style='width:" + this.config.width + "px;'" : "") + "><ul></ul></span>" +
             "</span>" +
             "</div>");
@@ -293,7 +298,7 @@
         _fillList: function(){
             var listContainer = this.$container.find('.pc-list ul');
             var counter = 0;
-            this.$elem.find('option').each(function(index, elem){
+            this.$elem.find('option:not([hidden])').each(function(index, elem){
                 var li = $("<li>").html($(elem).text()).attr('data-id', $(elem).attr('value')).attr('data-order', counter);
                 li.click(this.pc_selected.bind(this));
                 listContainer.append(li);
