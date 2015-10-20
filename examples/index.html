@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Picker | jQuery plugin</title>
+    <title>Select Picker | jQuery plugin</title>
     <link rel="stylesheet" href="css/main.css">
     <link href="css/prism.css" rel="stylesheet"/>
-
 
     <script type="text/javascript" src="js/libs.js"></script>
     <script type="text/javascript" src="js/prism.js"></script>
@@ -18,7 +17,7 @@
 <div class="content-container">
 
     <div class="masthead clearfix">
-        <h3 class="masthead-brand">Picker</h3>
+        <h3 class="masthead-brand">Select Picker</h3>
         <nav id="picker-nav">
             <ul class="nav masthead-nav">
                 <li class="active"><a href="#about">About</a></li>
@@ -31,13 +30,14 @@
 
     <div id="about">
         <h1>About</h1>
-        Picker is jQuery plugin supporting work with select boxes. It extends default
-        possibilities to new range of features. In basic set up, it will mimic basic
-        select box, but in the same time provide you extensive ways of styling the
-        appearance of your select box.<br>
-        But main field where Picker truly rock is when you want to use multiple selection,
+        Select Picker is jQuery plugin supporting work with select boxes. It extends default
+        possibilities of select boxes to new range of features. In basic set up, it will simply mimic basic
+        normal select box, but in the same time provide you extensive ways of styling the
+        appearance of your select box and several more neat features.<br>
+        Main field where Select Picker truly rock is when you want to use multiple selection in
         select boxes. It will provide you easy way how to facilitate user's selections
-        with tag-like appearance solution.
+        with tag-like appearance solution, providing you features like custom styling and
+        search.
     </div>
 
     <div id="examples">
@@ -206,11 +206,67 @@
 &lt;button id=&quot;ex-data-trigger&quot;&gt;Select Cairo city&lt;/button&gt;
 </code></pre>
 
-        <strong>Javascript</strong>
+        <strong id="coloring">Javascript</strong>
         <pre><code class="language-javascript">$('#ex-search').picker({search : true});
 $('#ex-data-trigger').click(function () {
     $('#ex-data-multiple').picker('set', 12);
 })</code></pre>
+
+        <h2>Coloring</h2>
+
+        Select Picker has small feature which will let you assign specific classes to
+        specific elements based on their option's <code>value</code>. To enable this
+        feature you just have to pass object where key is the desired option's and
+        the class you want to assign to desired element.<br>
+        Note that this feature applies only to selected options while multiple selection
+        mode is selected. Also the classes are applied only to selected options.
+
+        <div class="well">
+            Choose the main city you love:
+            <style type="text/css">
+                .orange{
+                    background-color: orange !important;
+                }
+                .blue{
+                    background-color: lightblue !important;
+                }
+            </style>
+            <select name="basic" id="ex-coloring" multiple>
+                <option value="1">Shanghai</option>
+                <option value="2" selected>Karachi</option>
+                <option value="3">Beijing</option>
+                <option value="4" selected="selected">Tianjin</option>
+                <option value="5">Istanbul</option>
+            </select><br>
+            <script type="text/javascript">
+                var classes = {
+                    2 : 'orange',
+                    4 : 'blue',
+                    5 : 'orange'
+                };
+
+                $('#ex-coloring').picker({coloring: classes});
+            </script>
+        </div>
+<pre><code class="language-markup">&lt;select name=&quot;basic&quot; id=&quot;ex-search&quot; multiple&gt;
+    &lt;option value=&quot;1&quot;&gt;Shanghai&lt;/option&gt;
+    &lt;option value=&quot;2&quot; selected&gt;Karachi&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Beijing&lt;/option&gt;
+    &lt;option value=&quot;4&quot; selected=&quot;selected&quot;&gt;Tianjin&lt;/option&gt;
+    &lt;option value=&quot;5&quot;&gt;Istanbul&lt;/option&gt;
+&lt;/select&gt;&lt;br&gt;
+</code></pre>
+
+        <strong>Javascript</strong>
+        <pre><code class="language-javascript">var classes = {
+    2 : 'orange',
+    4 : 'blue',
+    5 : 'orange'
+};
+
+$('#ex-coloring').picker({coloring: classes});</code></pre>
+
+
     </div>
 
     <div id="installation">
@@ -219,12 +275,117 @@ $('#ex-data-trigger').click(function () {
     </div>
 
     <div id="documentation">
-        <h1 class="cover-heading">Documentation</h1>
-        Picker is jQuery plugin for
-    </div>
+        <h1>Documentation</h1>
+        To start using Select Picker, first you have to include required files in your
+        HTML page. Basic way is to include in your <code>head</code> tag following part,
+        of course with modifying the path to the files
+        <pre><code class="language-markup">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/picker.css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/picker.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+        Then only thing you need to do is initialize Picker!
+         <pre><code class="language-javascript">&lt;script type=&quot;text/javascript&quot;&gt;
+    $(document).ready(function(){
+        $('#your-selector').picker();
+    });
+&lt;/script&gt;</code></pre>
+
+        <h2>Parameters</h2>
+
+        Picker bring you several parameters with which you can customize your Picker.
+
+        <h3>multiple</h3>
+        <div class="well">
+            <strong>Type:</strong> Boolean<br>
+            <strong>Default:</strong> Detected from <code>select</code> tag based on <code>multiple</code>
+            attribute.
+        </div>
+        This parametr lets you specified if Picker should work in single-selection mode or
+        multiple-selection mode, where selected options are displayed before the list in
+        tag-like appearance.
 
 
-    <div class="mastfoot">
+        <h3>containerClass</h3>
+        <div class="well">
+            <strong>Type:</strong> String<br>
+            <strong>Default:</strong> ''
+        </div>
+        Through <code>containerClass</code> parameter you can specify what class should be
+        added to whole Picker wrapping element. It is mostly to be used for specific styling purposes.
+
+
+        <h3>containerWidth</h3>
+        <div class="well">
+            <strong>Type:</strong> Integer<br>
+            <strong>Default:</strong> none
+        </div>
+        With <code>containerWidth</code> parameter you can set the width of whole container.
+        This comes handy especially in multiple-selection mode, when the selected options
+        could be outstretching the container and cause some layout problems.
+
+
+        <h3>width</h3>
+        <div class="well">
+            <strong>Type:</strong> Integer<br>
+            <strong>Default:</strong> 165 (set via CSS)
+        </div>
+        When you have a long option's text, Picker's drop-down list will break the text when it
+        will reached default width. With this option you can override the default width.
+
+        <h3>search</h3>
+        <div class="well">
+            <strong>Type:</strong> Boolean<br>
+            <strong>Default:</strong> false
+        </div>
+        With this option you can control the search feature. It can be used both with
+        single-selection and multi-selection mode.
+
+        <h3>searchAutofocus</h3>
+        <div class="well">
+            <strong>Type:</strong> Boolean<br>
+            <strong>Default:</strong> false<br>
+            <strong>Dependency:</strong> enabled search feature
+        </div>
+        When you enable the search feature, you can also enhance the user's experience,
+        with automatic focus to search field. At the same time when the focus is put
+        to search field, window is scrolled to the Picker.
+
+
+        <h3>autofocusScrollOffset</h3>
+        <div class="well">
+            <strong>Type:</strong> Integer<br>
+            <strong>Default:</strong> 0 <br>
+            <strong>Dependency:</strong> enabled search feature and search auto-focus.
+        </div>
+        If you need to modify the position to which the window is scrolled to, you can
+        set a offset from the Picker, by specifying <code>autofocusScrollOffset</code>.
+
+
+        <h3>coloring</h3>
+        <div class="well">
+            <strong>Type:</strong> Object<br>
+            <strong>Default:</strong> {} <br>
+            <strong>Dependency:</strong> multi-selection mode
+        </div>
+        If you want to customize each selected option, during multi-selection mode,
+        you can do it by creating object, where key value is option's value and the value of
+        pair is the class you want to assign and pass this object through <code>coloring</code>
+        parameter.<br>
+        Check the <a href="#coloring">example</a> to understand it better.
+
+
+        <h3>texts</h3>
+        <div class="well">
+            <strong>Type:</strong> Object<br>
+            <strong>Default:</strong> { trigger : "Select value", noResult : "No results", search : "Search" }
+        </div>
+        If you want to modify the Picker's messages you can modify it by passing object
+        with modified texts. Just please remember that you have to use same key values.
+
+        <h2>API</h2>
+
+
+
+        <div class="mastfoot">
         <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a
                 href="https://twitter.com/mdo">@mdo</a>.</p>
     </div>

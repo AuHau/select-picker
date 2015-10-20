@@ -6,19 +6,21 @@ a:focus,
 a:hover {
   color: #fff;
 }
+a{
+  text-decoration: underline;
+}
 
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
   background-color: #F9A40D;
 }
 body {
   width: 100%;
-  min-height: 100%;
   color: #fff;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  padding-top: 80px;
+  padding: 80px 0 40px;
 }
 
 .content-container {
@@ -31,7 +33,7 @@ body {
  */
 .well{
   background-color: white;
-  color: #F9A40D;
+  color: #b9790b;
   margin-top: 10px;
   text-shadow: none;
 }
@@ -49,7 +51,7 @@ code{
  * Header
  */
 .masthead{
-  padding-top: 20px;
+  padding: 20px 0;
   background-color: #F9A40D;
   z-index: 50;
   margin-left: -2px;
@@ -75,6 +77,7 @@ code{
   color: #fff; /* IE8 proofing */
   color: rgba(255,255,255,.75);
   border-bottom: 2px solid transparent;
+  text-decoration: none;
 }
 .masthead-nav > li > a:hover,
 .masthead-nav > li > a:focus {
