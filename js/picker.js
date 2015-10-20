@@ -1,10 +1,11 @@
+"use strict";
 
 // TODO : Events fireing or callback implementation
 // TODO : Add autofocus when open Picker with searchfield?
 // TODO/BUG : Basic select - default value
 
 
-;(function( $, window, document, undefined ){
+(function( $, window, document, undefined ){
     var Picker = function( elem, options ){
         this.elem = elem;
         this.$elem = $(elem);
@@ -15,13 +16,18 @@
     Picker.prototype = {
         defaults: {
             multiple: undefined,
-            trigger: "Select value",
+            placeholder: true,
             containerClass: '',
             width: false,
             search: false,
             searchAutofocus: false,
             autofocusScrollOffset: 0,
-            coloring: {}
+            coloring: {},
+            texts: {
+                trigger : "Select value",
+                noResult : "No results",
+                search : "Search"
+            }
         },
 
         config: {},
@@ -84,31 +90,8 @@
         pc_selected: function(e){
             var $elem = $(e.target);
             var selectedId = $elem.data('id');
+            this._selectElement(selectedId, $elem);
 
-            if(this.config.multiple) {
-                this.$container.prepend(this._createElement($elem));
-                $elem.remove();
-
-                if(this.config.search){
-                    this.currentData = this.currentData.filter(function (value) {
-                        return value.id != selectedId;
-                    });
-                }
-
-                if(this.$container.find(".pc-list li").size() == 0) {
-                    this.$container.find(".pc-trigger").hide();
-                }
-            }else{
-                this.$elem.find("option").removeAttr("selected");
-
-                if (this.config.coloring[selectedId]) {
-                    this.$container.find(".pc-trigger").removeClass().addClass(this.config.coloring[selectedId] + " pc-trigger pc-element").contents().first().replaceWith($elem.text());
-                } else {
-                    this.$container.find(".pc-trigger").contents().first().replaceWith($elem.text());
-                }
-            }
-
-            this.$elem.find("option[value='" + selectedId + "']").attr("selected", "selected");
             this.$container.find(".pc-list").hide();
 
             if(this.config.search){
@@ -176,6 +159,47 @@
             this._updateList(filteredData, searchedValue);
         },
 
+        ////////////////////////////////////////////
+        ////////////// Private methods//////////////
+        ////////////////////////////////////////////
+
+        _selectElement: function (id, $elem) {
+            if($elem == undefined){
+                $elem = this.$container.find('.pc-list li[data-id="' + id + '"]');
+
+                if($elem.length == 0){
+                    console.log('Picker - ID to select not found!');
+                    return;
+                }
+            }
+
+            if(this.config.multiple) {
+                this.$container.prepend(this._createElement($elem));
+                $elem.remove();
+
+                if(this.config.search){
+                    this.currentData = this.currentData.filter(function (value) {
+                        return value.id != id;
+                    });
+                }
+
+                if(this.$container.find(".pc-list li").size() == 0) {
+                    this.$container.find(".pc-trigger").hide();
+                }
+            }else{
+                this.$elem.find("option").removeAttr("selected");
+
+                if (this.config.coloring[id]) {
+                    this.$container.find(".pc-trigger").removeClass().addClass(this.config.coloring[selectedId] + " pc-trigger pc-element").contents().first().replaceWith($elem.text());
+                } else {
+                    this.$container.find(".pc-trigger").contents().first().replaceWith($elem.text());
+                }
+            }
+
+            this.$elem.find("option[value='" + id + "']").attr("selected", "selected");
+
+        },
+
         _insertIntoCurrentData: function (elem) {
             var $elem = $(elem.target);
             var selectedId = $elem.parent().data('id');
@@ -234,7 +258,7 @@
         _build: function(){
             this.$container = $("<div class='picker" + (this.config.containerClass ? ' ' + this.config.containerClass : '') + "'>" +
             "<span class='pc-select'>" +
-            "<span class='pc-element pc-trigger'>" + this.config.trigger + "</span>" +
+            "<span class='pc-element pc-trigger'>" + this.config.texts.trigger + "</span>" +
             "<span class='pc-list' " + ( this.config.width ? "style='width:" + this.config.width + "px;'" : "") + "><ul></ul></span>" +
             "</span>" +
             "</div>");
@@ -242,24 +266,28 @@
             this.$container.insertAfter(this.$elem);
 
             if(this.config.search){
-                var $searchField = $("<input type='search' placeholder='Search'>");
-                $searchField.on('input', this.pc_search.bind(this));
-                $searchField.on('keypress', function (e) {
-                    if(e.which == 13){
-                        var searchedValue = $(e.target).val().toLowerCase();
-                        var filteredData = this._filterData(searchedValue);
-
-                        if(filteredData.length == 1){
-                            this.$container.find('.pc-list li').first().click();
-                            return false;
-                        }
-                    }
-
-                    return true;
-                }.bind(this));
-
-                this.$container.find('.pc-list').prepend($searchField);
+                this._buildSearch();
             }
+        },
+
+        _buildSearch : function () {
+            var $searchField = $("<input type='search' placeholder='" + this.config.texts.search + "'>");
+            $searchField.on('input', this.pc_search.bind(this));
+            $searchField.on('keypress', function (e) {
+                if(e.which == 13){
+                    var searchedValue = $(e.target).val().toLowerCase();
+                    var filteredData = this._filterData(searchedValue);
+
+                    if(filteredData.length == 1){
+                        this.$container.find('.pc-list li').first().click();
+                        return false;
+                    }
+                }
+
+                return true;
+            }.bind(this));
+
+            this.$container.find('.pc-list').prepend($searchField);
         },
 
         _fillList: function(){
@@ -298,7 +326,7 @@
         _updateList: function(filteredData, searchedValue){
             var listContainer = this.$container.find('.pc-list ul');
             if(filteredData.length == 0){
-                listContainer.html('<li class="not-found">No results</li>');
+                listContainer.html('<li class="not-found">' + this.config.texts.noResult + '</li>');
                 return;
             }
 
@@ -351,6 +379,8 @@
                 console.log('Picker - unknown number of arguments');
                 return;
             }
+
+            this._selectElement(args[0]);
 
             return this.$elem;
         }
