@@ -105,8 +105,8 @@
             }
         },
 
-        pc_remove: function(elem){
-            var $elem = $(elem.target);
+        pc_remove: function(e){
+            var $elem = $(e.target);
             var selectedId = $elem.parent().data('id');
             var order = $elem.parent().data('order');
 
@@ -115,7 +115,7 @@
 
 
             if(this.config.search) {
-                this._insertIntoCurrentData(elem);
+                this._insertIntoCurrentData(e);
             }
 
             var currentList = this.$container.find('.pc-list li');
@@ -202,6 +202,10 @@
             }
 
             this.$elem.find("option[value='" + id + "']").attr("selected", "selected");
+
+        },
+
+        _removeElement: function (id) {
 
         },
 
@@ -392,11 +396,30 @@
 
         api_set : function (args) {
             if(args.length != 1){
-                console.log('Picker - unknown number of arguments');
+                console.log('Picker - unknown number of arguments.');
                 return;
             }
 
             this._selectElement(args[0]);
+
+            return this.$elem;
+        },
+
+        api_remove : function (args) {
+            if(args.length != 1){
+                console.log('Picker - unknown number of arguments.');
+                return;
+            }
+
+            if(!this.config.multiple){
+                console.log('Picker - remove method is allowed only with multiple-selection mode!');
+                return;
+            }
+
+            var e = {};
+            e.target = this.$container.find('.pc-element[data-id="' + args[0] + '"] .pc-close')[0];
+
+            this.pc_remove(e);
 
             return this.$elem;
         }
