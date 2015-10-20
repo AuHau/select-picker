@@ -1,5 +1,5 @@
 {
-  "name": "picker",
+  "name": "select-picker",
   "version": "0.1.0",
   "authors": [
     "Adam Uhlir <hello@adam-uhlir.me>"
@@ -19,6 +19,11 @@
   "devDependencies": {
     "bootstrap": "~3.3.5"
   },
+  "ignore": [
+    "doc/css/main.less",
+    ".gitignore",
+    "gulpfile.js"
+  ],
   "overrides": {
     "bootstrap": {
       "main": [
