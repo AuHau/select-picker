@@ -1,6 +1,13 @@
 "use strict";
 
-// TODO : Events fireing or callback implementation
+/**
+ * Select Picker 0.2.0
+ * -------------------
+ * Author: Adam Uhlir <hello@adam-uhlir.me>
+ * License: MIT
+ */
+
+// TODO : Add support for events
 // TODO : Add support for sorting
 // TODO : Tests
 
