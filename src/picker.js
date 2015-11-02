@@ -193,9 +193,11 @@
                     this.currentData = this.currentData.filter(function (value) {
                         return value.id != id;
                     });
-                }
 
-                if(this.$container.find(".pc-list li").size() == 0) {
+                    if(this.currentData.length == 0){
+                        this.$container.find(".pc-trigger").hide();
+                    }
+                }else if(this.$container.find(".pc-list li").size() == 0) {
                     this.$container.find(".pc-trigger").hide();
                 }
             }else{
@@ -209,10 +211,6 @@
             }
 
             this.$elem.find("option[value='" + id + "']").attr("selected", "selected");
-
-        },
-
-        _removeElement: function (id) {
 
         },
 
