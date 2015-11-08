@@ -13,37 +13,37 @@ var LessPluginAutoPrefix = require('less-plugin-autoprefix'),
     autoprefix= new LessPluginAutoPrefix({browsers: ["last 2 versions"]});
 
 gulp.task('css:big', function() {
-    return gulp.src('css/picker.less')
+    return gulp.src('src/picker.less')
         .pipe(plugins.less({
             plugins: [autoprefix]
         }))
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.rename('picker.css'))
-        .pipe(gulp.dest('css/'))
+        .pipe(gulp.dest('dist/'))
         .pipe(plugins.notify('CSS build finished'));
 });
 
 gulp.task('css:min', function() {
-    return gulp.src('css/picker.less')
+    return gulp.src('src/picker.less')
         .pipe(plugins.less({
             plugins: [autoprefix, cleancss]
         }))
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.rename('picker.min.css'))
-        .pipe(gulp.dest('css/'))
+        .pipe(gulp.dest('dist/'))
         .pipe(plugins.notify('CSS:min build finished'));
 });
 
 gulp.task('js:min', function() {
-    return gulp.src('js/picker.js')
+    return gulp.src('src/picker.js')
         .pipe(plugins.uglify())
         .pipe(plugins.rename('picker.min.js'))
-        .pipe(gulp.dest('js/'));
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('doc:js', function() {
     var files = mainBowerFiles({'includeDev': true});
-    files.push('js/picker.js');
+    files.push('src/picker.js');
 
     return gulp.src(files)
         .pipe(plugins.ignore.include('*.js'))
@@ -55,7 +55,7 @@ gulp.task('doc:js', function() {
 
 gulp.task('doc:css', function() {
     var files = mainBowerFiles({'includeDev': true});
-    files.push('css/picker.css');
+    files.push('dist/picker.css');
 
     return gulp.src('doc/css/main.less')
         .pipe(plugins.less({
@@ -79,6 +79,6 @@ gulp.task('doc:watch', ['doc'], function () {
     gulp.watch('doc/css/main.less', ['doc:css']);
 });
 
-gulp.task('default', ['css'], function() {
-    gulp.watch('css/picker.less', ['css:big']);
+gulp.task('default', ['build'], function() {
+    gulp.watch('src/picker.less', ['css:big']);
 });

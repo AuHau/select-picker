@@ -1,6 +1,13 @@
 "use strict";
 
-// TODO : Events fireing or callback implementation
+/**
+ * Select Picker 0.2.0
+ * -------------------
+ * Author: Adam Uhlir <hello@adam-uhlir.me>
+ * License: MIT
+ */
+
+// TODO : Add support for events
 // TODO : Add support for sorting
 // TODO : Tests
 
@@ -186,9 +193,11 @@
                     this.currentData = this.currentData.filter(function (value) {
                         return value.id != id;
                     });
-                }
 
-                if(this.$container.find(".pc-list li").size() == 0) {
+                    if(this.currentData.length == 0){
+                        this.$container.find(".pc-trigger").hide();
+                    }
+                }else if(this.$container.find(".pc-list li").size() == 0) {
                     this.$container.find(".pc-trigger").hide();
                 }
             }else{
@@ -202,10 +211,6 @@
             }
 
             this.$elem.find("option[value='" + id + "']").attr("selected", "selected");
-
-        },
-
-        _removeElement: function (id) {
 
         },
 
