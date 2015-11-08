@@ -8,7 +8,7 @@ Extensive documentation, with examples can be found on [http://picker.adam-uhlir
 
 ### Direct
 
-To include Select Picker directly to your project, download its files from [https://github.com/AuHau/select-picker/archive/master.zip](here)
+To include Select Picker directly to your project, download its files from [here](https://github.com/AuHau/select-picker/archive/master.zip)
 and include them as follow:
 ```html
 <link rel="stylesheet" href="path/to/file/picker.min.css">
@@ -79,4 +79,4 @@ Of course you can always override this in options when initializing Picker.
 </script>
 ```
 
-**More examples and documentation can be found on [http://picker.adam-uhlir.me](picker.adam-uhlir.me).
+**More examples and documentation can be found on [http://picker.adam-uhlir.me](picker.adam-uhlir.me).**
