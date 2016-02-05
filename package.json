@@ -20,7 +20,10 @@
   "author": "Adam Uhlir <hello@adam-uhlir.me>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AuHau/select-pickerissues"
+    "url": "https://github.com/AuHau/select-picker#issues"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/karma start --single-run"
   },
   "homepage": "https://github.com/AuHau/select-picker",
   "devDependencies": {
@@ -31,12 +34,18 @@
     "gulp-ignore": "^1.2.1",
     "gulp-less": "^3.0.3",
     "gulp-load-plugins": "^0.8.0",
-    "gulp-notify": "^2.1.0",
-    "gulp-uglify": "^1.0.2",
-    "gulp-rename": "^1.2.2",
     "gulp-minify-css": "^0.3.11",
+    "gulp-notify": "^2.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.0.2",
+    "jasmine-core": "^2.4.1",
+    "jasmine-jquery": "^2.1.1",
+    "karma": "^0.13.19",
+    "karma-jasmine": "^0.3.7",
+    "karma-phantomjs-launcher": "^1.0.0",
     "less-plugin-autoprefix": "^1.1.0",
     "less-plugin-clean-css": "^1.4.0",
-    "main-bower-files": "^2.4.1"
+    "main-bower-files": "^2.4.1",
+    "phantomjs-prebuilt": "^2.1.3"
   }
 }
