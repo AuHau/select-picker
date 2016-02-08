@@ -63,8 +63,13 @@
                 return;
             }
 
+            if(this.$elem.find('option:not([hidden])').length == 0) {
+                console.log("Picker - Select has no options. Can not proceed!");
+                return;
+            }
+
             this._build();
-            this.$elem.css('display', 'none');
+            this.$elem.hide();
 
             this._fillList();
 
