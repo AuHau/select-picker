@@ -9,6 +9,23 @@ var fillOptions = function (id, count) {
     }
 };
 
+var createRandomArray = function (length, start, end) {
+    var arr = [];
+    while (arr.length < length) {
+        var randomNumber = Math.floor(Math.random() * (end - start + 1)) + start;
+        var found = false;
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == randomNumber) {
+                found = true;
+                break;
+            }
+        }
+        if (!found)arr[arr.length] = randomNumber;
+    }
+
+    return arr;
+};
+
 describe("Single Picker - ", function () {
     beforeEach(function () {
         loadFixtures("document.fixture.html");
@@ -238,6 +255,23 @@ describe("Multi-selection Picker - ", function () {
             checkOrder();
         }
 
+    });
+
+    it("Data loading", function () {
+        var $select = $("#test");
+        fillOptions($select, 50);
+        var $container = $(".container");
+
+        var selectedOptions = createRandomArray(20, 0, 49);
+        selectedOptions.forEach(function (elem) {
+            $container.find("option[value='" + elem + "']").attr("selected", "selected");
+        });
+
+        $select.picker({multiple: true});
+
+        selectedOptions.forEach(function (elem) {
+            expect($container).toContainElement(".pc-element[data-id='" + elem + "']");
+        });
     });
 
 });
