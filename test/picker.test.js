@@ -42,8 +42,8 @@ describe("Single Picker - ", function () {
         expect($container).toContainElement("span.pc-select");
         expect($container).toContainElement("span.pc-list");
         expect($container).toContainElement("span.pc-element.pc-trigger");
-        expect($container.find(".picker > .pc-select > .pc-list > ul > li").length).toEqual(5);
-        expect($container.find(".pc-element").text()).toBe($select.find("option").first().text());
+        expect($container.find(".picker > .pc-select > .pc-list > ul > li")).toHaveLength(5);
+        expect($container.find(".pc-element")).toContainText($select.find("option").first().text());
     });
 
     it("No options init", function () {
@@ -63,7 +63,7 @@ describe("Single Picker - ", function () {
 
         expect($select).toBeHidden();
         expect($container).toContainElement("div.picker");
-        expect($container.find(".picker > .pc-select > .pc-list > ul > li").length).toEqual(1000);
+        expect($container.find(".picker > .pc-select > .pc-list > ul > li")).toHaveLength(1000);
     });
 
     it("List building", function () {
@@ -73,10 +73,10 @@ describe("Single Picker - ", function () {
         $select.picker();
 
         var $options = $container.find(".picker > .pc-select > .pc-list > ul > li");
-        expect($options.length).toEqual(5);
+        expect($options).toHaveLength(5);
         $options.each(function () {
             var selectOptionText = $select.find("option[value='" + $(this).data('id') +"']").text();
-            expect($(this).text()).toBe(selectOptionText);
+            expect($(this)).toContainText(selectOptionText);
         });
     });
 
@@ -100,7 +100,7 @@ describe("Single Picker - ", function () {
         var $options = $container.find(".picker > .pc-select > .pc-list > ul > li");
         $options.each(function () {
             $(this).click();
-            expect($container.find(".pc-element").text()).toBe($(this).text());
+            expect($container.find(".pc-element")).toContainText($(this).text());
             expect($select.find("option[value='" + $(this).data('id') +"']")).toHaveAttr("selected");
         });
 
@@ -113,9 +113,9 @@ describe("Single Picker - ", function () {
         var $container = $(".container");
         $select.picker();
 
-        expect($container.find(".pc-element").text()).toBe("Placeholder");
-        expect($container.find(".picker > .pc-select > .pc-list > ul > li").length).toEqual(5);
-        expect($container.find(".pc-list li:contains('Placeholder')").length).toEqual(0);
+        expect($container.find(".pc-element")).toContainText("Placeholder");
+        expect($container.find(".picker > .pc-select > .pc-list > ul > li")).toHaveLength(5);
+        expect($container.find(".pc-list li:contains('Placeholder')")).toHaveLength(0);
     });
 
 });
@@ -142,7 +142,7 @@ describe("Multi-selection Picker - ", function () {
         expect($container).toContainElement("span.pc-select");
         expect($container).toContainElement("span.pc-list");
         expect($container).toContainElement("span.pc-element.pc-trigger");
-        expect($container.find(".picker > .pc-select > .pc-list > ul > li").length).toEqual(5);
+        expect($container.find(".picker > .pc-select > .pc-list > ul > li")).toHaveLength(5);
         expect($container.find(".pc-trigger")).toHaveText("Random");
     });
 
