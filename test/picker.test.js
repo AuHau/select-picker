@@ -184,5 +184,60 @@ describe("Multi-selection Picker - ", function () {
             expect($container.find(".picker li[data-id='" + $this.data('id') +"']")).toExist();
         });
     });
-    
+
+    it("Respecting original order of options", function () {
+        var testLength = 100;
+        var $select = $("#test");
+        fillOptions($select, testLength);
+        var $container = $(".container");
+        $select.picker({multiple: true});
+
+        //////////////////////////////
+        // Helpers
+        var shuffleArray = function(o){
+            for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+            return o;
+        };
+
+        var checkOrder = function () {
+            var options = $container.find(".pc-list li");
+
+            if(options.length == 1) {
+                return
+            }
+
+            var currentVal, previousVal, nextVal;
+            for(var i = 1; i < options.length - 1; i++) {
+                currentVal = parseInt($(options[i]).data("id"));
+
+                if(i == (options.length - 1) && currentVal < parseInt($(options[i-1]).data("id"))) {
+                    fail("Order is not matching!");
+                    return;
+                }
+
+                previousVal = parseInt($(options[i-1]).data("id"));
+                nextVal = parseInt($(options[i+1]).data("id"));
+
+                if(currentVal < previousVal || currentVal > nextVal) {
+                    fail("Order is not matching!");
+                }
+            }
+        };
+        //////////////////////////////
+
+        var selectArray = shuffleArray(Array.apply(null, {length: testLength}).map(Number.call, Number));
+        for(var i = 0; i < testLength; i++) {
+            $container.find(".pc-list li[data-id='" + selectArray[i] + "']").click();
+        }
+
+        expect($container.find(".pc-trigger")).toBeHidden();
+        var returnArray = shuffleArray(selectArray);
+
+        for(i = 0; i < testLength; i++) {
+            $container.find(".pc-element[data-id='" + returnArray[i] + "'] .pc-close").click();
+            checkOrder();
+        }
+
+    });
+
 });
