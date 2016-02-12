@@ -276,12 +276,7 @@
         },
 
         _build: function(){
-            var triggerText;
-            if(this.config.multiple){
-                triggerText = this.config.texts.trigger;
-            }else{
-                triggerText = this.$elem.find('option').first().text();
-            }
+            var triggerText = this.config.texts.trigger;
 
             this.$container = $("<div class='picker" + (this.config.containerClass ? ' ' + this.config.containerClass : '') + "'>" +
             "<span class='pc-select'>" +

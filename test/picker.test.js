@@ -35,7 +35,7 @@ describe("Single Picker - ", function () {
         var $select = $("#test");
         fillOptions($select, 5);
         var $container = $(".container");
-        $select.picker();
+        $select.picker({texts: { trigger : "aaa", noResult : "bbb", search : "ccc" }});
 
         expect($select).toBeHidden();
         expect($container).toContainElement("div.picker");
@@ -43,7 +43,7 @@ describe("Single Picker - ", function () {
         expect($container).toContainElement("span.pc-list");
         expect($container).toContainElement("span.pc-element.pc-trigger");
         expect($container.find(".picker > .pc-select > .pc-list > ul > li")).toHaveLength(5);
-        expect($container.find(".pc-element")).toContainText($select.find("option").first().text());
+        expect($container.find(".pc-element")).toContainText("aaa");
     });
 
     it("No options init", function () {
@@ -108,14 +108,13 @@ describe("Single Picker - ", function () {
 
     it("Hidden attribute", function () {
         var $select = $("#test");
-        $select.append($("<option value='' disabled hidden>Placeholder</option>"));
+        $select.append($("<option value='' disabled hidden>hidden</option>"));
         fillOptions($select, 5);
         var $container = $(".container");
         $select.picker();
 
-        expect($container.find(".pc-element")).toContainText("Placeholder");
         expect($container.find(".picker > .pc-select > .pc-list > ul > li")).toHaveLength(5);
-        expect($container.find(".pc-list li:contains('Placeholder')")).toHaveLength(0);
+        expect($container).not.toContainElement(".pc-list li:contains('Placeholder')");
     });
 
 });
@@ -285,4 +284,58 @@ describe("Multi-selection Picker - ", function () {
         });
     });
 
+});
+
+describe("Picker configuration - ", function () {
+    beforeEach(function () {
+        loadFixtures("document.fixture.html");
+    });
+
+    it("container class", function () {
+        var $select = $("#test");
+        fillOptions($select, 10);
+        var $container = $(".container");
+        $select.picker({containerClass: "testClass"});
+
+        expect($container).toContainElement(".testClass.picker");
+
+    });
+
+    it("container width", function () {
+        var $select = $("#test");
+        fillOptions($select, 10);
+        var $container = $(".container");
+        $select.picker({containerWidth: 100});
+
+        expect($container.find(".picker").width()).toEqual(100);
+        expect($container.find(".picker")).toHaveAttr("style");
+
+    });
+
+    it("list width", function () {
+        var $select = $("#test");
+        fillOptions($select, 10);
+        var $container = $(".container");
+        $select.picker({width: 100});
+
+        expect($container.find(".picker .pc-list").attr("style")).toMatch("width:100px;");
+    });
+
+    it("texts", function () {
+        var $select = $("#test");
+        fillOptions($select, 10);
+        var $container = $(".container");
+        $select.picker({
+            search: true,
+            texts: { trigger : "aaa", noResult : "bbb", search : "ccc" }
+        });
+
+        var $input = $container.find(".pc-list input[type='search']");
+        expect($container.find(".pc-trigger")).toContainText("aaa");
+        expect($input.attr("placeholder")).toBe("ccc");
+
+        $input.val("asd");
+        $input.trigger("input");
+        expect($container.find("li.not-found")).toContainText("bbb");
+    })
 });
