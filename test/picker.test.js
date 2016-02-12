@@ -146,6 +146,17 @@ describe("Multi-selection Picker - ", function () {
         expect($container.find(".pc-trigger")).toHaveText("Random");
     });
 
+    it("Auto init", function () {
+        var $select = $("#test");
+        $select.attr("multiple", "multiple");
+        fillOptions($select, 5);
+        var $container = $(".container");
+        $select.picker();
+
+        $container.find(".pc-list li").first().click();
+        expect($container).toContainElement(".pc-element:not(.pc-trigger)");
+    });
+
     it("Select one value", function () {
         var $select = $("#test");
         fillOptions($select, 5);
