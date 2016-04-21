@@ -211,6 +211,7 @@
             }
 
             this.$elem.find("option[value='" + id + "']").attr("selected", "selected");
+            this.$elem.trigger('change');
 
         },
 
