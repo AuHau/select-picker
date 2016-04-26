@@ -73,7 +73,7 @@
     &lt;option value=&quot;2&quot;&gt;Very nice&lt;/option&gt;
     &lt;option value=&quot;3&quot;&gt;Awesome&lt;/option&gt;
     &lt;option value=&quot;4&quot;&gt;Godlike&lt;/option&gt;
-    &lt;/select&gt;
+&lt;/select&gt;
 </code></pre>
 
         <strong>Javascript</strong>
@@ -83,7 +83,6 @@
         Main purpose why Picker was developed was for tag selection. You can enable this
         feature really easily. Picker is smart enough to detect presence of <code>multiple</code>
         attribute with select tag and then enable multiple selection.
-        Of course you can always override this in options when initializing picker.
         <div class="well">
             Choose what type of people you like:
             <select name="basic" id="ex-multiselect" multiple>
@@ -107,7 +106,7 @@
     &lt;option value=&quot;4&quot;&gt;Introverts&lt;/option&gt;
     &lt;option value=&quot;5&quot;&gt;Ambitious&lt;/option&gt;
     &lt;option value=&quot;6&quot;&gt;Loud&lt;/option&gt;
-    &lt;/select&gt;
+&lt;/select&gt;
 </code></pre>
 
         <strong>Javascript</strong>
@@ -153,7 +152,7 @@
     &lt;option value=&quot;10&quot;&gt;Moscow&lt;/option&gt;
     &lt;option value=&quot;11&quot;&gt;Dhaka&lt;/option&gt;
     &lt;option value=&quot;12&quot;&gt;Cairo&lt;/option&gt;
-    &lt;/select&gt;
+&lt;/select&gt;
 </code></pre>
 
         <strong>Javascript</strong>
@@ -205,15 +204,15 @@
     &lt;option value=&quot;10&quot;&gt;Moscow&lt;/option&gt;
     &lt;option value=&quot;11&quot;&gt;Dhaka&lt;/option&gt;
     &lt;option value=&quot;12&quot;&gt;Cairo&lt;/option&gt;
-    &lt;/select&gt;&lt;br&gt;
-    &lt;button id=&quot;ex-data-trigger&quot;&gt;Select Cairo city&lt;/button&gt;
+&lt;/select&gt;&lt;br&gt;
+&lt;button id=&quot;ex-data-trigger&quot;&gt;Select Cairo city&lt;/button&gt;
 </code></pre>
 
         <strong id="coloring">Javascript</strong>
         <pre><code class="language-javascript">$('#ex-search').picker({search : true});
-            $('#ex-data-trigger').click(function () {
-            $('#ex-data-multiple').picker('set', 12);
-            })</code></pre>
+    $('#ex-data-trigger').click(function () {
+    $('#ex-data-multiple').picker('set', 12);
+})</code></pre>
 
         <h2>Coloring</h2>
 
@@ -258,17 +257,17 @@
     &lt;option value=&quot;3&quot;&gt;Beijing&lt;/option&gt;
     &lt;option value=&quot;4&quot; selected=&quot;selected&quot;&gt;Tianjin&lt;/option&gt;
     &lt;option value=&quot;5&quot;&gt;Istanbul&lt;/option&gt;
-    &lt;/select&gt;&lt;br&gt;
+&lt;/select&gt;&lt;br&gt;
 </code></pre>
 
         <strong>Javascript</strong>
         <pre><code class="language-javascript">var classes = {
-            2 : 'orange',
-            4 : 'blue',
-            5 : 'orange'
-            };
+    2 : 'orange',
+    4 : 'blue',
+    5 : 'orange'
+};
 
-            $('#ex-coloring').picker({coloring: classes});</code></pre>
+$('#ex-coloring').picker({coloring: classes});</code></pre>
 
 
     </div>
@@ -306,30 +305,18 @@
         HTML page. Basic way is to include in your <code>head</code> tag following part,
         of course with modifying the path to the files
         <pre><code class="language-markup">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/picker.css&quot;&gt;
-            &lt;script type=&quot;text/javascript&quot; src=&quot;js/picker.js&quot;&gt;&lt;/script&gt;</code></pre>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/picker.js&quot;&gt;&lt;/script&gt;</code></pre>
 
         Then only thing you need to do is initialize Picker!
          <pre><code class="language-javascript">&lt;script type=&quot;text/javascript&quot;&gt;
-             $(document).ready(function(){
-             $('#your-selector').picker();
-             });
-             &lt;/script&gt;</code></pre>
+    $(document).ready(function(){
+        $('#your-selector').picker();
+    });
+&lt;/script&gt;</code></pre>
 
         <h2>Parameters</h2>
 
         Picker bring you several parameters with which you can customize your Picker.
-
-        <h3>multiple</h3>
-
-        <div class="well">
-            <strong>Type:</strong> Boolean<br>
-            <strong>Default:</strong> Detected from <code>select</code> tag based on <code>multiple</code>
-            attribute.
-        </div>
-        This parametr lets you specified if Picker should work in single-selection mode or
-        multiple-selection mode, where selected options are displayed before the list in
-        tag-like appearance.
-
 
         <h3>containerClass</h3>
 
@@ -425,8 +412,8 @@
         called through single element selector.
 
         <pre><code class="language-javascript">$('.multiple-used-class').picker(); // Will work
-            $('.multiple-used-class').picker('set', 2); // Will work
-            $('.multiple-used-class').picker('get'); // Won't work</code></pre>
+$('.multiple-used-class').picker('set', 2); // Will work
+$('.multiple-used-class').picker('get'); // Won't work</code></pre>
 
         <h3>$('...').picker('destroy');</h3>
 

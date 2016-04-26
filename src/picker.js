@@ -22,7 +22,6 @@
 
     Picker.prototype = {
         defaults: {
-            multiple: undefined,
             containerClass: '',
             containerWidth: false,
             width: false,
@@ -42,14 +41,12 @@
         init: function() {
             this.config = $.extend({}, this.defaults, this.options);
 
-            if(this.config.multiple === undefined) {
-                this.config.multiple = this.$elem.is("select[multiple='multiple']") || this.$elem.is("select[multiple]");
-            }
-
             if(!this.$elem.is("select")){
                 console.log("Picker - Element is not Selectbox");
                 return;
             }
+
+            this.config.multiple = this.$elem.is("select[multiple='multiple']") || this.$elem.is("select[multiple]");
 
             if(this.config.width !== false
                 && (Math.floor(this.config.width) != this.config.width || !$.isNumeric(this.config.width))){
@@ -63,8 +60,13 @@
                 return;
             }
 
+            if(this.$elem.find('option:not([hidden])').length == 0) {
+                console.log("Picker - Select has no options. Can not proceed!");
+                return;
+            }
+
             this._build();
-            this.$elem.css('display', 'none');
+            this.$elem.hide();
 
             this._fillList();
 
@@ -271,12 +273,7 @@
         },
 
         _build: function(){
-            var triggerText;
-            if(this.config.multiple){
-                triggerText = this.config.texts.trigger;
-            }else{
-                triggerText = this.$elem.find('option').first().text();
-            }
+            var triggerText = this.config.texts.trigger;
 
             this.$container = $("<div class='picker" + (this.config.containerClass ? ' ' + this.config.containerClass : '') + "'>" +
             "<span class='pc-select'>" +

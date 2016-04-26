@@ -1,5 +1,11 @@
 # Select Picker
 
+***
+
+[![Build Status](https://travis-ci.org/AuHau/select-picker.svg?branch=master)](https://travis-ci.org/AuHau/select-picker)
+
+***
+
 Select Picker is jQuery plugin for multiselect tag-like picker.
 
 Extensive documentation, with examples can be found on [http://picker.adam-uhlir.me](picker.adam-uhlir.me).
@@ -8,7 +14,7 @@ Extensive documentation, with examples can be found on [http://picker.adam-uhlir
 
 ### Direct
 
-To include Select Picker directly to your project, download its files from [here](https://github.com/AuHau/select-picker/archive/master.zip)
+To include Select Picker directly to your project, download its files from [https://github.com/AuHau/select-picker/archive/master.zip](here)
 and include them as follow:
 ```html
 <link rel="stylesheet" href="path/to/file/picker.min.css">
@@ -79,4 +85,15 @@ Of course you can always override this in options when initializing Picker.
 </script>
 ```
 
-**More examples and documentation can be found on [http://picker.adam-uhlir.me](picker.adam-uhlir.me).**
+**More examples and documentation can be found on [http://picker.adam-uhlir.me](picker.adam-uhlir.me).
+
+## Contribution
+
+If you would like to contribute, you are very much welcome! Just please always write test coverage 
+and properly document your change in documentation.
+
+### Tests
+
+Currently for tests I am using Karma + Jasmine. To run the tests, first install dependencies with `npm install` and 
+then to simply run `npm test`. This will run test in headless browser (PhantomJS). You can run the tests in Chrome
+using `npm run test-chrome` or if you need to debug your test `npm run test-debug`.
