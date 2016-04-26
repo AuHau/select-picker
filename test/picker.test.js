@@ -1,6 +1,11 @@
 'use strict';
 jasmine.getFixtures().fixturesPath = 'base/test/fixtures';
 
+/**
+ * Function which will fill select tag with options
+ * @param id
+ * @param count
+ */
 var fillOptions = function (id, count) {
     var $elem = (id instanceof jQuery ? id : $(id));
 
@@ -9,7 +14,15 @@ var fillOptions = function (id, count) {
     }
 };
 
-var createRandomArray = function (length, start, end) {
+/**
+ * Function which will return array filled with random integers in specified range without duplications.
+ * @param length
+ * @param start
+ * @param end
+ * @param [toString] defines if the numbers should be converted to string
+ * @returns {Array}
+ */
+var createRandomArray = function (length, start, end, toString) {
     var arr = [];
     while (arr.length < length) {
         var randomNumber = Math.floor(Math.random() * (end - start + 1)) + start;
@@ -20,7 +33,7 @@ var createRandomArray = function (length, start, end) {
                 break;
             }
         }
-        if (!found)arr[arr.length] = randomNumber;
+        if (!found)arr[arr.length] = (toString ? randomNumber + '' : randomNumber);
     }
 
     return arr;
@@ -28,7 +41,7 @@ var createRandomArray = function (length, start, end) {
 
 describe("Single Picker - ", function () {
     beforeEach(function () {
-        loadFixtures("document.fixture.html");
+        loadFixtures("single.fixture.html");
     });
 
     it("Standard init", function () {
@@ -121,7 +134,7 @@ describe("Single Picker - ", function () {
 
 describe("Multi-selection Picker - ", function () {
     beforeEach(function () {
-        loadFixtures("document.fixture.html");
+        loadFixtures("multiple.fixture.html");
     });
 
     it("Init", function () {
@@ -129,7 +142,6 @@ describe("Multi-selection Picker - ", function () {
         fillOptions($select, 5);
         var $container = $(".container");
         $select.picker({
-            multiple: true,
             texts: {
                 trigger: "Random"
             }
@@ -160,7 +172,7 @@ describe("Multi-selection Picker - ", function () {
         var $select = $("#test");
         fillOptions($select, 5);
         var $container = $(".container");
-        $select.picker({multiple: true});
+        $select.picker();
 
         var $option = $container.find(".picker > .pc-select > .pc-list > ul > li").first();
         $option.click();
@@ -182,7 +194,7 @@ describe("Multi-selection Picker - ", function () {
         var $select = $("#test");
         fillOptions($select, 5);
         var $container = $(".container");
-        $select.picker({multiple: true});
+        $select.picker();
 
         var $options = $container.find(".picker > .pc-select > .pc-list > ul > li");
         $options.each(function () {
@@ -217,7 +229,7 @@ describe("Multi-selection Picker - ", function () {
         var $select = $("#test");
         fillOptions($select, testLength);
         var $container = $(".container");
-        $select.picker({multiple: true});
+        $select.picker();
 
         //////////////////////////////
         // Helpers
@@ -277,7 +289,7 @@ describe("Multi-selection Picker - ", function () {
             $container.find("option[value='" + elem + "']").attr("selected", "selected");
         });
 
-        $select.picker({multiple: true});
+        $select.picker();
 
         selectedOptions.forEach(function (elem) {
             expect($container).toContainElement(".pc-element[data-id='" + elem + "']");
@@ -288,7 +300,7 @@ describe("Multi-selection Picker - ", function () {
 
 describe("Picker configuration - ", function () {
     beforeEach(function () {
-        loadFixtures("document.fixture.html");
+        loadFixtures("single.fixture.html");
     });
 
     it("container class", function () {
@@ -338,4 +350,129 @@ describe("Picker configuration - ", function () {
         $input.trigger("input");
         expect($container.find("li.not-found")).toContainText("bbb");
     })
+});
+
+describe("Picker API - ", function () {
+    it("destroy", function () {
+        loadFixtures("single.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        var $container = $(".container");
+        $select.picker();
+
+        expect($container).toContainElement(".picker");
+        $select.picker("destroy");
+        expect($container).not.toContainElement(".picker");
+    });
+
+    it("get (single)", function () {
+        loadFixtures("single.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        var $container = $(".container");
+        $select.picker();
+
+        var option = $($container.find(".pc-list li")[3]);
+        option.click();
+
+        // Change needs to propagate through the DOM
+        setTimeout(function(){
+            expect($select.picker("get")).toBe(option.data("id") + '');
+        }, 10);
+    });
+
+    it("get (multiple) - one item", function () {
+        loadFixtures("multiple.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        var $container = $(".container");
+        $select.picker();
+
+        var option = $($container.find(".pc-list li")[3]);
+        option.click();
+        expect($select.picker("get")).toEqual([option.data("id") + '']);
+    });
+
+    it("get (multiple) - several items", function () {
+        loadFixtures("multiple.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        var $container = $(".container");
+        $select.picker();
+
+        var listOptions = $container.find(".pc-list li");
+        var selectArray = createRandomArray(4, 0, 9);
+        selectArray.forEach(function(item){
+            $(listOptions[item]).click();
+        });
+
+        selectArray.sort();
+
+        expect($select.picker("get")).toEqual(selectArray.map(function(item){
+            return item + '';
+        }));
+    });
+
+    it("set (single)", function () {
+        loadFixtures("single.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        $select.picker();
+
+        $select.picker("set", 4);
+
+        // Change needs to propagate through the DOM
+        setTimeout(function(){
+            expect($select.picker("get")).toBe('4');
+        }, 10);
+    });
+
+
+    it("set (multiple)", function () {
+        loadFixtures("multiple.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        $select.picker();
+
+        $select.picker("set", 2);
+        $select.picker("set", 4);
+        $select.picker("set", 6);
+
+        expect($select.picker("get")).toEqual(['2', '4', '6']);
+    });
+
+    it("remove - after natural click", function () {
+        loadFixtures("multiple.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        var $container = $(".container");
+        $select.picker();
+
+        var listOptions = $container.find(".pc-list li");
+        var selectArray = [2, 4, 7, 8, 9];
+        selectArray.forEach(function(item){
+            $(listOptions[item]).click();
+        });
+        selectArray.sort();
+
+        expect($select.picker("get")).toEqual(selectArray.map(function(item){ return item + ''}));
+        $select.picker("remove", 8);
+        expect($select.picker("get")).toEqual(['2', '4', '7', '9']);
+    });
+
+    it("remove - after using 'set'", function () {
+        loadFixtures("multiple.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        $select.picker();
+
+
+        $select.picker("set", 2);
+        $select.picker("set", 4);
+        $select.picker("set", 6);
+
+        expect($select.picker("get")).toEqual(['2', '4', '6']);
+        $select.picker("remove", 6);
+        expect($select.picker("get")).toEqual(['2', '4']);
+    });
 });
