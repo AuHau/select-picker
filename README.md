@@ -1,5 +1,11 @@
 # Select Picker
 
+***
+
+[![Build Status](https://travis-ci.org/AuHau/select-picker.svg?branch=master)](https://travis-ci.org/AuHau/select-picker)
+
+***
+
 Select Picker is jQuery plugin for multiselect tag-like picker.
 
 Extensive documentation, with examples can be found on [http://picker.adam-uhlir.me](picker.adam-uhlir.me).
