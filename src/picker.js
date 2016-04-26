@@ -22,7 +22,6 @@
 
     Picker.prototype = {
         defaults: {
-            multiple: undefined,
             containerClass: '',
             containerWidth: false,
             width: false,
@@ -42,14 +41,12 @@
         init: function() {
             this.config = $.extend({}, this.defaults, this.options);
 
-            if(this.config.multiple === undefined) {
-                this.config.multiple = this.$elem.is("select[multiple='multiple']") || this.$elem.is("select[multiple]");
-            }
-
             if(!this.$elem.is("select")){
                 console.log("Picker - Element is not Selectbox");
                 return;
             }
+
+            this.config.multiple = this.$elem.is("select[multiple='multiple']") || this.$elem.is("select[multiple]");
 
             if(this.config.width !== false
                 && (Math.floor(this.config.width) != this.config.width || !$.isNumeric(this.config.width))){
