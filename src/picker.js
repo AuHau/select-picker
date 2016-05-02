@@ -9,7 +9,6 @@
 
 // TODO : Add support for events
 // TODO : Add support for sorting
-// TODO : Tests
 // TODO : Implement event delegation for the click handlers
 
 (function( $, window, document, undefined ){
