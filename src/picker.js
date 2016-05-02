@@ -7,7 +7,6 @@
  * License: MIT
  */
 
-// TODO : Add support for events
 // TODO : Add support for sorting
 // TODO : Implement event delegation for the click handlers
 
@@ -73,6 +72,8 @@
                 var list = this.$container.find('.pc-list');
                 list.toggle();
 
+                this.$elem.trigger(list.is(':visible') ? 'sp-open' : 'sp-close');
+
                 if(this.config.search && this.config.searchAutofocus){
                     if (list.is(':visible')) {
                         list.find('input').focus();
@@ -89,6 +90,7 @@
                     if (!pc_list.is(e.target) && pc_list.has(e.target).length === 0 && !this.$container.find(".pc-trigger").is(e.target))
                     {
                         pc_list.hide();
+                        this.$elem.trigger('sp-close');
 
                         if(this.config.search){
                             this.$container.find(".pc-list input").val('');
@@ -112,6 +114,8 @@
                 this.$container.find(".pc-list input").val('');
                 this._updateList(this.currentData);
             }
+
+            this.$elem.trigger('sp-change');
         },
 
         pc_remove: function(e){
@@ -165,6 +169,7 @@
             }
             this.$elem.find(" option[value='" + selectedId + "']").removeAttr("selected");
             $elem.parent().remove();
+            this.$elem.trigger('sp-change');
         },
 
         pc_search: function(e){
