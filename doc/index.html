@@ -209,8 +209,8 @@
 </code></pre>
 
         <strong id="coloring">Javascript</strong>
-        <pre><code class="language-javascript">$('#ex-search').picker({search : true});
-    $('#ex-data-trigger').click(function () {
+        <pre><code class="language-javascript">$('#ex-data-multiple').picker();
+$('#ex-data-trigger').click(function () {
     $('#ex-data-multiple').picker('set', 12);
 })</code></pre>
 
@@ -269,6 +269,48 @@
 
 $('#ex-coloring').picker({coloring: classes});</code></pre>
 
+
+        <h2>Events</h2>
+
+        Select Picker has basic support for events. Attach your event listeners to the original
+        <code>select</code> element.
+
+        <div class="well">
+            Choose what type of people you like:
+            <select name="basic" id="ex-events" multiple>
+                <option value="1">Kind</option>
+                <option value="2">Easy-going</option>
+                <option value="3">Extroverted</option>
+                <option value="4">Introvertted</option>
+                <option value="5">Ambitious</option>
+                <option value="6">Loud</option>
+            </select>
+            <script type="text/javascript">
+                var $elem = $('#ex-events');
+                $elem.picker({containerWidth: 410});
+                $elem.on('sp-change', function(){
+                    alert('Great! Thanks for letting me know!');
+                });
+            </script>
+        </div>
+
+        <strong>HTML</strong>
+<pre><code class="language-markup">&lt;select name=&quot;basic&quot; id=&quot;ex-events&quot; multiple&gt;
+    &lt;option value=&quot;1&quot;&gt;Kind&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Easy-going&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Extroverts&lt;/option&gt;
+    &lt;option value=&quot;4&quot;&gt;Introverts&lt;/option&gt;
+    &lt;option value=&quot;5&quot;&gt;Ambitious&lt;/option&gt;
+    &lt;option value=&quot;6&quot;&gt;Loud&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+        <strong>JavaScript</strong>
+<pre><code class="language-javascript">var $elem = $('#ex-events');
+$elem.picker();
+$elem.on('sp-change', function(){
+    alert('Great! Thanks for letting me know!');
+});</code></pre>
 
     </div>
 
@@ -455,6 +497,31 @@ $('.multiple-used-class').picker('get'); // Won't work</code></pre>
         <div class="mastfoot">
             <p>Created by <a href="http://www.adam-uhlir.me">Adam Uhlíř</a> &copy; 2015</p>
         </div>
+        
+        <h2>Events</h2>
+
+        Select Picker has currently basic support for events. Any suggestions for extending currently supported events
+        will be very much welcomed.
+
+        <table class="table">
+            <tr>
+                <th>Name of event</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>sp-change</strong></td>
+                <td>Triggered when some element is chosen (in single mode)<br> or add/removed (in multiple mode).</td>
+            </tr>
+            <tr>
+                <td><strong>sp-open</strong></td>
+                <td>Triggered when is the dropdown menu opened.</td>
+            </tr>
+            <tr>
+                <td><strong>sp-close</strong></td>
+                <td>Triggered when is the dropdown menu closed.</td>
+            </tr>
+        </table>
+
     </div>
 </div>
 <script>
