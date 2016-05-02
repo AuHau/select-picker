@@ -408,6 +408,7 @@
             }
 
             this._selectElement(args[0]);
+            this.$elem.trigger('sp-change');
 
             return this.$elem;
         },

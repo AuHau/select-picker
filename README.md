@@ -6,7 +6,7 @@ Select Picker is jQuery plugin for multiselect tag-like picker.
 
 Extensive documentation, with examples can be found on [http://picker.adam-uhlir.me](picker.adam-uhlir.me).
 
-## Instalation
+## Installation
 
 ### Direct
 
@@ -86,7 +86,7 @@ Of course you can always override this in options when initializing Picker.
 ## Contribution
 
 If you would like to contribute, you are very much welcome! Just please always write test coverage 
-and properly document your change in documentation.
+and properly document your changes in documentation.
 
 ### Tests
 
