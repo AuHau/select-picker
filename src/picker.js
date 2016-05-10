@@ -9,6 +9,8 @@
 
 // TODO : Add support for sorting
 // TODO : Implement event delegation for the click handlers
+// TODO : Implement opt-groups
+// TODO : Implement "required" constrain
 
 (function( $, window, document, undefined ){
     var Picker = function( elem, options ){
@@ -282,7 +284,7 @@
             this.$container = $("<div class='picker" + (this.config.containerClass ? ' ' + this.config.containerClass : '') + "'>" +
             "<span class='pc-select'>" +
             "<span class='pc-element pc-trigger'>" + triggerText + "</span>" +
-            "<span class='pc-list' " + ( this.config.width ? "style='width:" + this.config.width + "px;'" : "") + "><ul></ul></span>" +
+            "<span class='pc-list' " + ( this.config.width ? "style='width:" + this.config.width + "px; display:none;'" : "style='display:none;'") + "><ul></ul></span>" +
             "</span>" +
             "</div>");
 
