@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Select Picker 0.2.0
+ * Select Picker 0.3.0
  * -------------------
  * Author: Adam Uhlir <hello@adam-uhlir.me>
  * License: MIT
