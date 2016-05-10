@@ -1,6 +1,6 @@
 # Select Picker
 
-[![Build Status](https://travis-ci.org/AuHau/select-picker.svg?branch=master)](https://travis-ci.org/AuHau/select-picker) [![npm version](https://badge.fury.io/js/select-picker.svg)](https://badge.fury.io/js/select-picker)
+[![Build Status](https://travis-ci.org/AuHau/select-picker.svg?branch=master)](https://travis-ci.org/AuHau/select-picker) [![npm version](https://badge.fury.io/js/select-picker.svg)](https://badge.fury.io/js/select-picker) [![Bower version](https://badge.fury.io/bo/select-picker.svg)](https://badge.fury.io/bo/select-picker)
 
 Select Picker is jQuery plugin for multiselect tag-like picker.
 
