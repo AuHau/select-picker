@@ -466,7 +466,6 @@ describe("Picker API - ", function () {
         fillOptions($select, 10);
         $select.picker();
 
-
         $select.picker("set", 2);
         $select.picker("set", 4);
         $select.picker("set", 6);
@@ -475,4 +474,77 @@ describe("Picker API - ", function () {
         $select.picker("remove", 6);
         expect($select.picker("get")).toEqual(['2', '4']);
     });
+});
+
+describe("Picker Events - ", function () {
+    it("sp-change event - single mode", function(){
+        loadFixtures("single.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        $select.picker();
+
+        var spChangeEvent = spyOnEvent('#test', 'sp-change');
+        var $option = $(".container").find(".picker > .pc-select > .pc-list > ul > li").first();
+        $option.click();
+        expect(spChangeEvent).toHaveBeenTriggered();
+    });
+
+    it("sp-change event - multiple mode", function(){
+        loadFixtures("multiple.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        $select.picker();
+        var $container = $(".container");
+
+        var spChangeEvent = spyOnEvent('#test', 'sp-change');
+        var $options = $container.find(".picker > .pc-select > .pc-list > ul > li");
+
+        // Adding all
+        $options.each(function () {
+            $(this).click();
+            expect(spChangeEvent).toHaveBeenTriggered();
+            spChangeEvent.reset();
+        });
+
+        // Removing all
+        $container.find(".pc-element:not(.pc-trigger)").each(function () {
+            $(this).find('.pc-close').click();
+            expect(spChangeEvent).toHaveBeenTriggered();
+            spChangeEvent.reset();
+        });
+    });
+
+    it("sp-change event - API set/remove", function(){
+        loadFixtures("multiple.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        $select.picker();
+
+        var spChangeEvent = spyOnEvent('#test', 'sp-change');
+
+        $select.picker('set', 1);
+        expect(spChangeEvent).toHaveBeenTriggered();
+        spChangeEvent.reset();
+
+        $select.picker('remove', 1);
+        expect(spChangeEvent).toHaveBeenTriggered();
+    });
+
+
+    it("sp-open/sp-close event", function(){
+        loadFixtures("single.fixture.html");
+        var $select = $("#test");
+        fillOptions($select, 10);
+        $select.picker();
+
+        var spOpenEvent = spyOnEvent('#test', 'sp-open');
+        var spCloseEvent = spyOnEvent('#test', 'sp-close');
+        var $trigger = $('.container .pc-element.pc-trigger');
+        $trigger.click();
+        expect(spOpenEvent).toHaveBeenTriggered();
+        $trigger.click();
+        expect(spCloseEvent).toHaveBeenTriggered();
+
+    });
+
 });

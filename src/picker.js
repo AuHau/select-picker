@@ -1,16 +1,16 @@
 "use strict";
 
 /**
- * Select Picker 0.2.0
+ * Select Picker 0.3.0
  * -------------------
  * Author: Adam Uhlir <hello@adam-uhlir.me>
  * License: MIT
  */
 
-// TODO : Add support for events
 // TODO : Add support for sorting
-// TODO : Tests
 // TODO : Implement event delegation for the click handlers
+// TODO : Implement opt-groups
+// TODO : Implement "required" constrain
 
 (function( $, window, document, undefined ){
     var Picker = function( elem, options ){
@@ -74,6 +74,8 @@
                 var list = this.$container.find('.pc-list');
                 list.toggle();
 
+                this.$elem.trigger(list.is(':visible') ? 'sp-open' : 'sp-close');
+
                 if(this.config.search && this.config.searchAutofocus){
                     if (list.is(':visible')) {
                         list.find('input').focus();
@@ -90,6 +92,7 @@
                     if (!pc_list.is(e.target) && pc_list.has(e.target).length === 0 && !this.$container.find(".pc-trigger").is(e.target))
                     {
                         pc_list.hide();
+                        this.$elem.trigger('sp-close');
 
                         if(this.config.search){
                             this.$container.find(".pc-list input").val('');
@@ -113,6 +116,8 @@
                 this.$container.find(".pc-list input").val('');
                 this._updateList(this.currentData);
             }
+
+            this.$elem.trigger('sp-change');
         },
 
         pc_remove: function(e){
@@ -166,6 +171,7 @@
             }
             this.$elem.find(" option[value='" + selectedId + "']").removeAttr("selected");
             $elem.parent().remove();
+            this.$elem.trigger('sp-change');
         },
 
         pc_search: function(e){
@@ -278,7 +284,7 @@
             this.$container = $("<div class='picker" + (this.config.containerClass ? ' ' + this.config.containerClass : '') + "'>" +
             "<span class='pc-select'>" +
             "<span class='pc-element pc-trigger'>" + triggerText + "</span>" +
-            "<span class='pc-list' " + ( this.config.width ? "style='width:" + this.config.width + "px;'" : "") + "><ul></ul></span>" +
+            "<span class='pc-list' " + ( this.config.width ? "style='width:" + this.config.width + "px; display:none;'" : "style='display:none;'") + "><ul></ul></span>" +
             "</span>" +
             "</div>");
 
@@ -404,6 +410,7 @@
             }
 
             this._selectElement(args[0]);
+            this.$elem.trigger('sp-change');
 
             return this.$elem;
         },
