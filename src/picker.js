@@ -148,7 +148,7 @@
             var currentList = this.$container.find('.pc-list li');
             if(this.$container.find(".pc-list li").length == 0) { // Empty list
                 this.$container.find('.pc-list ul').html('').append(li);
-            }else if(currentList.size() == 1) { // Only one item in list
+            }else if(currentList.length == 1) { // Only one item in list
                 if(order > currentList.data('order')){
                     li.insertAfter(currentList);
                 }else{
@@ -219,7 +219,7 @@
                     if(this.currentData.length == 0 || reachedLimit){
                         this.$container.find(".pc-trigger").hide();
                     }
-                }else if(this.$container.find(".pc-list li").size() == 0 || reachedLimit) {
+                }else if(this.$container.find(".pc-list li").length == 0 || reachedLimit) {
                     this.$container.find(".pc-trigger").hide();
                 }
             }else{
