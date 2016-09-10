@@ -9,6 +9,7 @@
     <link href="css/prism.css" rel="stylesheet"/>
 
     <script type="text/javascript" src="js/libs.js"></script>
+    <script type="text/javascript" src="js/picker.js"></script>
     <script type="text/javascript" src="js/prism.js"></script>
 </head>
 <body data-spy="scroll" data-target="#picker-nav">
@@ -111,6 +112,37 @@
 
         <strong>Javascript</strong>
         <pre><code class="language-javascript">$('#ex-multiselect').picker();</code></pre>
+
+        <h2>Multi-selection Picker with limit</h2>
+        There is possibility to limit how much options can user choose with the multi-selection picker.
+        <div class="well">
+            Choose what type of people you like:
+            <select name="basic" id="ex-multiselect-limit" multiple>
+                <option value="1">Kind</option>
+                <option value="2">Easy-going</option>
+                <option value="3">Extroverts</option>
+                <option value="4">Introverts</option>
+                <option value="5">Ambitious</option>
+                <option value="6">Loud</option>
+            </select>
+            <script type="text/javascript">
+                $('#ex-multiselect-limit').picker({containerWidth: 410, limit: 2});
+            </script>
+        </div>
+
+        <strong>HTML</strong>
+<pre><code class="language-markup">&lt;select name=&quot;basic&quot; id=&quot;ex-multiselect-limit&quot; multiple&gt;
+    &lt;option value=&quot;1&quot;&gt;Kind&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Easy-going&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Extroverts&lt;/option&gt;
+    &lt;option value=&quot;4&quot;&gt;Introverts&lt;/option&gt;
+    &lt;option value=&quot;5&quot;&gt;Ambitious&lt;/option&gt;
+    &lt;option value=&quot;6&quot;&gt;Loud&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+        <strong>Javascript</strong>
+        <pre><code class="language-javascript">$('#ex-multiselect-limit').picker({limit: 2});</code></pre>
 
         <h2>Picker with search</h2>
         Since sometime you have a lot of possibilities to choose from and it might be
@@ -360,6 +392,29 @@ $elem.on('sp-change', function(){
 
         Picker bring you several parameters with which you can customize your Picker.
 
+        <h3>autofocusScrollOffset</h3>
+
+        <div class="well">
+            <strong>Type:</strong> Integer<br>
+            <strong>Default:</strong> 0 <br>
+            <strong>Dependency:</strong> enabled search feature and search auto-focus.
+        </div>
+        If you need to modify the position to which the window is scrolled to, you can
+        set a offset from the Picker, by specifying <code>autofocusScrollOffset</code>.
+
+        <h3>coloring</h3>
+
+        <div class="well">
+            <strong>Type:</strong> Object<br>
+            <strong>Default:</strong> {} <br>
+            <strong>Dependency:</strong> multi-selection mode
+        </div>
+        If you want to customize each selected option, during multi-selection mode,
+        you can do it by creating object, where key value is option's value and the value of
+        pair is the class you want to assign and pass this object through <code>coloring</code>
+        parameter.<br>
+        Check the <a href="#coloring">example</a> to understand it better.
+
         <h3>containerClass</h3>
 
         <div class="well">
@@ -380,15 +435,16 @@ $elem.on('sp-change', function(){
         This comes handy especially in multiple-selection mode, when the selected options
         could be outstretching the container and cause some layout problems.
 
-
-        <h3>width</h3>
+        <h3>limit</h3>
 
         <div class="well">
             <strong>Type:</strong> Integer<br>
-            <strong>Default:</strong> 165 (set via CSS)
+            <strong>Default:</strong> none <br>
+            <strong>Dependency:</strong> multi-selection mode
         </div>
-        When you have a long option's text, Picker's drop-down list will break the text when it
-        will reached default width. With this option you can override the default width.
+        If you want to limit, how much options can user select in the multi-selection mode,
+        can use <code>limit</code> parameter. After reaching the limit, the dropdown will be
+        hidden and will be shown again only when user will remove some of the options.
 
         <h3>search</h3>
 
@@ -410,32 +466,6 @@ $elem.on('sp-change', function(){
         with automatic focus to search field. At the same time when the focus is put
         to search field, window is scrolled to the Picker.
 
-
-        <h3>autofocusScrollOffset</h3>
-
-        <div class="well">
-            <strong>Type:</strong> Integer<br>
-            <strong>Default:</strong> 0 <br>
-            <strong>Dependency:</strong> enabled search feature and search auto-focus.
-        </div>
-        If you need to modify the position to which the window is scrolled to, you can
-        set a offset from the Picker, by specifying <code>autofocusScrollOffset</code>.
-
-
-        <h3>coloring</h3>
-
-        <div class="well">
-            <strong>Type:</strong> Object<br>
-            <strong>Default:</strong> {} <br>
-            <strong>Dependency:</strong> multi-selection mode
-        </div>
-        If you want to customize each selected option, during multi-selection mode,
-        you can do it by creating object, where key value is option's value and the value of
-        pair is the class you want to assign and pass this object through <code>coloring</code>
-        parameter.<br>
-        Check the <a href="#coloring">example</a> to understand it better.
-
-
         <h3>texts</h3>
 
         <div class="well">
@@ -445,6 +475,15 @@ $elem.on('sp-change', function(){
         If you want to modify the Picker's messages you can modify it by passing object
         with modified texts. Just please remember that you have to use same key values as default
         object.
+
+        <h3>width</h3>
+
+        <div class="well">
+            <strong>Type:</strong> Integer<br>
+            <strong>Default:</strong> 165 (set via CSS)
+        </div>
+        When you have a long option's text, Picker's drop-down list will break the text when it
+        will reached default width. With this option you can override the default width.
 
         <h2>API</h2>
 

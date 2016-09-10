@@ -66,15 +66,6 @@
                 return;
             }
 
-            if(!this.config.multiple && this.config.limit > 0) {
-                console.log("Picker - You are applying limit parameter on single-seleciton mode Picker!");
-            }
-
-            if(this.config.limit < 0) {
-                console.log("Picker - Limit has to be greater then 0!");
-                return;
-            }
-
             this._build();
             this.$elem.hide();
 
@@ -144,6 +135,7 @@
             }
 
             this.$container.find(".pc-trigger").show();
+
 
             var currentList = this.$container.find('.pc-list li');
             if(this.$container.find(".pc-list li").length == 0) { // Empty list

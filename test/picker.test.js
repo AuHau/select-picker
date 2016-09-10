@@ -296,6 +296,22 @@ describe("Multi-selection Picker - ", function () {
         });
     });
 
+
+    it("Limited options", function () {
+        var $select = $("#test");
+        fillOptions($select, 50);
+        var $container = $(".container");
+        $select.picker({limit: 10});
+
+        createRandomArray(10, 0, 49).forEach(function (elem) {
+            $container.find(".pc-list ul li[data-id='" + elem + "']").click();
+        });
+
+        expect($container.find(".pc-trigger")).toBeHidden();
+        $container.find(".pc-element:not(.pc-trigger) .pc-close").first().click();
+        expect($container.find(".pc-trigger")).toBeVisible();
+    });
+
 });
 
 describe("Picker configuration - ", function () {
