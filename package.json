@@ -1,6 +1,6 @@
 {
   "name": "select-picker",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Multi-select tags like picker as plugin for jQuery",
   "main": "js/picker.js",
   "directories": {

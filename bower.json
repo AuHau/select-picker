@@ -1,11 +1,11 @@
 {
   "name": "select-picker",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "authors": [
     "Adam Uhlir <hello@adam-uhlir.me>"
   ],
   "description": "Multi-select tags like picker as plugin for jQuery",
-  "main": "js/picker.js",
+  "main": ["dist/picker.min.js", "dist/picker.min.css"],
   "keywords": [
     "jquery",
     "js",
