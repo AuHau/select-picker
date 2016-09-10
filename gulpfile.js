@@ -5,6 +5,7 @@ var gulpLoadPlugins = require('gulp-load-plugins');
 var plugins = gulpLoadPlugins();
 
 var mainBowerFiles = require('main-bower-files');
+var merge = require('merge-stream');
 
 var LessPluginCleanCSS = require("less-plugin-clean-css"),
     cleancss = new LessPluginCleanCSS({advanced: true});
@@ -42,15 +43,18 @@ gulp.task('js:min', function() {
 });
 
 gulp.task('doc:js', function() {
-    var files = mainBowerFiles({'includeDev': true});
-    files.push('src/picker.js');
-
-    return gulp.src(files)
+    var libs = gulp.src(mainBowerFiles({'includeDev': true}))
         .pipe(plugins.ignore.include('*.js'))
         .on('error', plugins.notify.onError("Error: <%= error.file %> <%= error.message %>"))
         .pipe(plugins.concat('libs.js'))
         .pipe(plugins.uglify())
         .pipe(gulp.dest('doc/js/'));
+
+    var src = gulp.src('src/picker.js')
+        .pipe(gulp.dest('doc/js/'));
+
+    return merge(libs, src)
+        .pipe(plugins.notify('JS done!'));
 });
 
 gulp.task('doc:css', function() {
@@ -77,6 +81,7 @@ gulp.task('build', ['doc', 'css', 'js:min']);
 
 gulp.task('doc:watch', ['doc'], function () {
     gulp.watch('doc/css/main.less', ['doc:css']);
+    gulp.watch('src/picker.js', ['doc:js']);
 });
 
 gulp.task('default', ['build'], function() {
