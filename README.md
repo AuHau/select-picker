@@ -81,7 +81,7 @@ Of course you can always override this in options when initializing Picker.
 </script>
 ```
 
-**More examples and documentation can be found on [http://picker.adam-uhlir.me](picker.adam-uhlir.me).
+**More examples and documentation can be found on [picker.adam-uhlir.me](http://picker.adam-uhlir.me).
 
 ## Contribution
 
