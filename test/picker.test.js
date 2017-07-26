@@ -394,7 +394,7 @@ describe("Picker API - ", function () {
         // Change needs to propagate through the DOM
         setTimeout(function(){
             expect($select.picker("get")).toBe(option.data("id") + '');
-        }, 10);
+        }, 200);
     });
 
     it("get (multiple) - one item", function () {
