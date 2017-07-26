@@ -440,7 +440,7 @@ describe("Picker API - ", function () {
         // Change needs to propagate through the DOM
         setTimeout(function(){
             expect($select.picker("get")).toBe('4');
-        }, 10);
+        }, 200);
     });
 
 
