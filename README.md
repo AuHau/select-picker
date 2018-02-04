@@ -1,6 +1,7 @@
 # Select Picker
 
-[![Build Status](https://travis-ci.org/AuHau/select-picker.svg?branch=master)](https://travis-ci.org/AuHau/select-picker) [![npm version](https://badge.fury.io/js/select-picker.svg)](https://badge.fury.io/js/select-picker) [![Bower version](https://badge.fury.io/bo/select-picker.svg)](https://badge.fury.io/bo/select-picker)
+[![Build Status](https://travis-ci.org/AuHau/select-picker.svg?branch=master)](https://travis-ci.org/AuHau/select-picker) [![npm version](https://badge.fury.io/js/select-picker.svg)](https://badge.fury.io/js/select-picker) [![Bower version](https://badge.fury.io/bo/select-picker.svg)](https://badge.fury.io/bo/select-picker)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAuHau%2Fselect-picker.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FAuHau%2Fselect-picker?ref=badge_shield)
+
 
 Select Picker is jQuery plugin for multiselect tag-like picker.
 
@@ -93,3 +94,7 @@ and properly document your changes in documentation.
 Currently for tests I am using Karma + Jasmine. To run the tests, first install dependencies with `npm install` and 
 then to simply run `npm test`. This will run test in headless browser (PhantomJS). You can run the tests in Chrome
 using `npm run test-chrome` or if you need to debug your test `npm run test-debug`.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAuHau%2Fselect-picker.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FAuHau%2Fselect-picker?ref=badge_large)
