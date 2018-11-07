@@ -292,7 +292,8 @@
         },
 
         _build: function(){
-            var triggerText = this.config.texts.trigger;
+            var firstOptText = this.$elem.find('option:eq(0)').text()
+            var triggerText = firstOptText ? firstOptText : this.config.texts.trigger;
 
             this.$container = $("<div class='picker" + (this.config.containerClass ? ' ' + this.config.containerClass : '') + "'>" +
             "<span class='pc-select'>" +

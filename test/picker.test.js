@@ -56,7 +56,7 @@ describe("Single Picker - ", function () {
         expect($container).toContainElement("span.pc-list");
         expect($container).toContainElement("span.pc-element.pc-trigger");
         expect($container.find(".picker > .pc-select > .pc-list > ul > li")).toHaveLength(5);
-        expect($container.find(".pc-element")).toContainText("aaa");
+        expect($container.find(".pc-element")).toContainText($select.find('option:eq(0)').text());
     });
 
     it("No options init", function () {
@@ -154,7 +154,7 @@ describe("Multi-selection Picker - ", function () {
         expect($container).toContainElement("span.pc-list");
         expect($container).toContainElement("span.pc-element.pc-trigger");
         expect($container.find(".picker > .pc-select > .pc-list > ul > li")).toHaveLength(5);
-        expect($container.find(".pc-trigger")).toHaveText("Random");
+        expect($container.find(".pc-trigger")).toHaveText($select.find('option:eq(0)').text());
     });
 
     it("Auto init", function () {
@@ -359,7 +359,7 @@ describe("Picker configuration - ", function () {
         });
 
         var $input = $container.find(".pc-list input[type='search']");
-        expect($container.find(".pc-trigger")).toContainText("aaa");
+        expect($container.find(".pc-trigger")).toContainText($select.find('option:eq(0)').text());
         expect($input.attr("placeholder")).toBe("ccc");
 
         $input.val("asd");
