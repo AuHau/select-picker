@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Select Picker 0.3.0
+ * Select Picker 0.3.3
  * -------------------
  * Author: Adam Uhlir <hello@adam-uhlir.me>
  * License: MIT
@@ -180,7 +180,7 @@
                     }
                 });
             }
-            this.$elem.find(" option[value='" + selectedId + "']").removeAttr("selected");
+            this.$elem.find("option[value='" + selectedId + "']").prop("selected", false);
             $elem.parent().remove();
             this.$elem.trigger('sp-change');
         },
@@ -223,7 +223,7 @@
                     this.$container.find(".pc-trigger").hide();
                 }
             }else{
-                this.$elem.find("option").removeAttr("selected");
+                this.$elem.find("option").prop("selected", false);
 
                 if (this.config.coloring[id]) {
                     this.$container.find(".pc-trigger").removeClass().addClass(this.config.coloring[selectedId] + " pc-trigger pc-element").contents().first().replaceWith($elem.text());
@@ -232,7 +232,7 @@
                 }
             }
 
-            this.$elem.find("option[value='" + id + "']").attr("selected", "selected");
+            this.$elem.find("option[value='" + id + "']").prop("selected", true);
 
         },
 
@@ -350,7 +350,7 @@
                 }
 
 
-                if($(elem).attr('selected') == 'selected'){
+                if($(elem).prop('selected') == true){
                     li.click();
                 }
 

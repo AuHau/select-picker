@@ -114,7 +114,7 @@ describe("Single Picker - ", function () {
         $options.each(function () {
             $(this).click();
             expect($container.find(".pc-element")).toContainText($(this).text());
-            expect($select.find("option[value='" + $(this).data('id') +"']")).toHaveAttr("selected");
+            expect($select.find("option[value='" + $(this).data('id') +"']").prop('selected')).toBe(true);
         });
 
     });
@@ -176,7 +176,7 @@ describe("Multi-selection Picker - ", function () {
 
         var $option = $container.find(".picker > .pc-select > .pc-list > ul > li").first();
         $option.click();
-        expect($select.find("option[value='" + $option.data('id') +"']")).toHaveAttr("selected");
+        expect($select.find("option[value='" + $option.data('id') +"']").prop('selected')).toBe(true);
         expect($option[0]).not.toBeInDOM();
         expect($container.find(".picker li[data-id='" + $option.data('id') +"']")).not.toExist();
 
@@ -200,7 +200,7 @@ describe("Multi-selection Picker - ", function () {
         $options.each(function () {
             var $this = $(this);
             $this.click();
-            expect($select.find("option[value='" + $this.data('id') +"']")).toHaveAttr("selected");
+            expect($select.find("option[value='" + $this.data('id') +"']").prop('selected')).toBe(true);
             expect(this).not.toBeInDOM();
             expect($container.find(".picker li[data-id='" + $this.data('id') +"']")).not.toExist();
         });
