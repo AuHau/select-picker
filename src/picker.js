@@ -30,6 +30,7 @@
             autofocusScrollOffset: 0,
             coloring: {},
             limit: undefined,
+            markSearchString: true,
             texts: {
                 trigger : "Select value",
                 noResult : "No results",
@@ -377,7 +378,7 @@
             var i, liContent;
             for(i = 0; i < filteredData.length; i++){
                 // Highlighting searched string
-                if(searchedValue !== undefined){
+                if(searchedValue !== undefined && this.config.markSearchString){
                     var regex = new RegExp( '(' + searchedValue + ')', 'gi' );
                     liContent = filteredData[i].text.replace( regex, '<span class="searched">$1</span>' )
                 }else{
