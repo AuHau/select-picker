@@ -30,6 +30,8 @@
             autofocusScrollOffset: 0,
             coloring: {},
             limit: undefined,
+            markSearchString: true,
+            useOptionAsPlaceholder: false,
             texts: {
                 trigger : "Select value",
                 noResult : "No results",
@@ -292,8 +294,8 @@
         },
 
         _build: function(){
-            var firstOptText = this.$elem.find('option:eq(0)').text()
-            var triggerText = firstOptText ? firstOptText : this.config.texts.trigger;
+            var firstOptText = this.$elem.find('option:eq(0)').text();
+            var triggerText = (firstOptText && this.config.useOptionAsPlaceholder) ? firstOptText : this.config.texts.trigger;
 
             this.$container = $("<div class='picker" + (this.config.containerClass ? ' ' + this.config.containerClass : '') + "'>" +
             "<span class='pc-select'>" +
@@ -377,7 +379,7 @@
             var i, liContent;
             for(i = 0; i < filteredData.length; i++){
                 // Highlighting searched string
-                if(searchedValue !== undefined){
+                if(searchedValue !== undefined && this.config.markSearchString){
                     var regex = new RegExp( '(' + searchedValue + ')', 'gi' );
                     liContent = filteredData[i].text.replace( regex, '<span class="searched">$1</span>' )
                 }else{

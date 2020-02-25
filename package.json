@@ -23,6 +23,9 @@
     "url": "https://github.com/AuHau/select-picker#issues"
   },
   "scripts": {
+    "gulp": "gulp",
+    "prebuild": "bower install",
+    "build": "gulp build",
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
     "test-chrome": "./node_modules/.bin/karma start --single-run --browsers Chrome_custom",
     "test-debug": "./node_modules/.bin/karma start --single-run=false --debug --browsers Chrome_custom"
