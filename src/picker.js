@@ -31,6 +31,7 @@
             coloring: {},
             limit: undefined,
             markSearchString: true,
+            useOptionAsPlaceholder: false,
             texts: {
                 trigger : "Select value",
                 noResult : "No results",
@@ -293,8 +294,8 @@
         },
 
         _build: function(){
-            var firstOptText = this.$elem.find('option:eq(0)').text()
-            var triggerText = firstOptText ? firstOptText : this.config.texts.trigger;
+            var firstOptText = this.$elem.find('option:eq(0)').text();
+            var triggerText = (firstOptText && this.config.useOptionAsPlaceholder) ? firstOptText : this.config.texts.trigger;
 
             this.$container = $("<div class='picker" + (this.config.containerClass ? ' ' + this.config.containerClass : '') + "'>" +
             "<span class='pc-select'>" +
